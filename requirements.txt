@@ -25,3 +25,4 @@ Levenshtein
 rank_bm25
 language_tool_python
 pygtrie
+PyPDF2

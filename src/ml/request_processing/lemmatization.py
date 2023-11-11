@@ -62,3 +62,4 @@ def lemma_text(text):
     while '  ' in text:
         text = text.replace('  ', ' ')
     return text
+

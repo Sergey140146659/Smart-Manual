@@ -64,13 +64,6 @@ class Trie:
             self._dfs(node.children[char], prefix + char, words)
 
 
-with open(get_path("faq.json"), 'r', encoding='utf-8') as f:
-    all_faq = json.load(f)
-
-with open(get_path("articles.json"), 'r', encoding='utf-8') as f:
-    all_articles = json.load(f)
-
-
 def remove_non_letters(text):
     text = text.translate(replace_dict)
     text = text.lower()
@@ -82,18 +75,10 @@ def remove_non_letters(text):
 
 article_trie = Trie()  # префиксное дерево, в котором содержатся все слова из статей на helpgznext
 
-for article_i in all_articles["article_info"]:
-    for word in article_i["article_combined_text"].split(' '):
-        article_trie.insert(remove_non_letters(word))
-for faq_i in all_faq["faq_info"]:
-    for word in faq_i["faq_combined_text"].split(' '):
-        article_trie.insert(remove_non_letters(word))
-
 
 def check_word(word):
     '''
     Проверяет, является ли длина слова меньше 3 символов. Если это так, то возвращает пустую строку.
-    Если длина слова больше 25 символов, обрезает его до 25 символов.
     Ищет слово в префиксном дереве "article_trie". Если слово найдено, возвращает его.
     Если слово не найдено, проверяет все возможные префиксы слова (от начала до последних трех символов) и ищет их в "article_trie". Если находит первый найденный префикс, возвращает его.
     Если ни один из префиксов не найден в "article_trie", вызывает функцию "correct(word)", которая исправляет опечатки в слове и возвращает исправленное слово.
