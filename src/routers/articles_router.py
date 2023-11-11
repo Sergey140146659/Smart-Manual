@@ -8,7 +8,6 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from DataBase.Query.query_schemas import QueryCreate
 from DataBase.Query.rate_schemas import Rate, WriteQuestions, IsUseful
-from DataBase.System.system_db_operations import auth_system_db
 from DataBase.database_config import get_async_session
 from auth.auth_config import validate_token
 from ml.db_creating.db_correction import add_question as add_question_db
@@ -29,18 +28,6 @@ async def answer(new_query: QueryCreate,
                  response: Response,
                  session: AsyncSession = Depends(get_async_session)):
     try:
-        access = False
-
-        system_token = request.cookies.get("system_token")
-        access_token = request.cookies.get("access_token")
-        if await auth_system_db(system_token, session) != None or \
-                await validate_token(access_token, JWT_SECRET, JWT_ALGORITHM):
-            access = True
-
-        if not access:
-            response.status_code = 400
-            return {"status": "error", "message": "Unauthorized"}
-
         questions = new_query.questions
         questions_dict = questions.__dict__
 
@@ -58,18 +45,6 @@ async def answer_without_classification(new_query: QueryCreate,
                                         response: Response,
                                         session: AsyncSession = Depends(get_async_session)):
     try:
-        access = False
-
-        system_token = request.cookies.get("system_token")
-        access_token = request.cookies.get("access_token")
-        if await auth_system_db(system_token, session) != None or \
-           await validate_token(access_token, JWT_SECRET, JWT_ALGORITHM):
-            access = True
-
-        if not access:
-            response.status_code = 400
-            return {"status": "error", "message": "Unauthorized"}
-
         questions = new_query.questions
         questions_dict = questions.__dict__
         query_answer = get_answer(new_query.query, questions_dict)
@@ -148,30 +123,6 @@ async def post_rate(new_write: WriteQuestions,
             return {"status": "error", "message": "Unauthorized user."}
 
         update_question_list(new_write.article_name, new_write.query_list)
-        return {"status": "success"}
-    except Exception as e:
-        response.status_code = 500
-        return {"status": "error", "message": str(e)}
-
-
-@router.post("/is_useful")
-async def query_id_useful(new_is_useful: IsUseful,
-                          response: Response,
-                          request: Request,
-                          session: AsyncSession = Depends(get_async_session)):
-    try:
-        access = False
-
-        system_token = request.cookies.get("system_token")
-        access_token = request.cookies.get("access_token")
-        if await auth_system_db(system_token, session) != None or \
-                await validate_token(access_token, JWT_SECRET, JWT_ALGORITHM):
-            access = True
-
-        if not access:
-            response.status_code = 400
-            return {"status": "error", "message": "Unauthorized"}
-
         return {"status": "success"}
     except Exception as e:
         response.status_code = 500
