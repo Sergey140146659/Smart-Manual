@@ -6,7 +6,6 @@ import pytz
 from fastapi import APIRouter, Depends, Response, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from DataBase.Query.query_db_operations import add_query_db, query_is_useful_db
 from DataBase.Query.query_schemas import QueryCreate
 from DataBase.Query.rate_schemas import Rate, WriteQuestions, IsUseful
 from DataBase.System.system_db_operations import auth_system_db
@@ -46,20 +45,8 @@ async def answer(new_query: QueryCreate,
         questions_dict = questions.__dict__
 
         query_answer = ml_user_get_answer(new_query.query, questions_dict)
-        new_query_dict = {
-            "query": new_query.query,
-            "result": json.dumps(query_answer["ans"], ensure_ascii=False),
-            "chat_id": new_query.chat_id,
-            "comment": query_answer["comment"],
-            "is_valid": query_answer["is_valid"],
-            "date": datetime.now(pytz.timezone('Europe/Moscow')),
-            "fixed": False
-        }
 
-        result = await add_query_db(new_query_dict, session)
-        query_id = result["query_id"]
-
-        return {"status": "success", "data": query_answer, "id": query_id}
+        return {"status": "success", "data": query_answer}
     except Exception as e:
         response.status_code = 500
         return {"status": "error", "message": str(e)}
@@ -85,23 +72,8 @@ async def answer_without_classification(new_query: QueryCreate,
 
         questions = new_query.questions
         questions_dict = questions.__dict__
-
         query_answer = get_answer(new_query.query, questions_dict)
-
-        new_query_dict = {
-            "query": new_query.query,
-            "result": json.dumps(query_answer["ans"], ensure_ascii=False),
-            "chat_id": new_query.chat_id,
-            "comment": query_answer["comment"],
-            "is_valid": query_answer["is_valid"],
-            "date": datetime.now(pytz.timezone('Europe/Moscow')),
-            "fixed": False
-        }
-
-        result = await add_query_db(new_query_dict, session)
-        query_id = result["query_id"]
-
-        return {"status": "success", "data": query_answer, "id": query_id}
+        return {"status": "success", "data": query_answer}
     except Exception as e:
         response.status_code = 500
         return {"status": "error", "message": str(e)}
@@ -200,7 +172,6 @@ async def query_id_useful(new_is_useful: IsUseful,
             response.status_code = 400
             return {"status": "error", "message": "Unauthorized"}
 
-        await query_is_useful_db(new_is_useful, session)
         return {"status": "success"}
     except Exception as e:
         response.status_code = 500

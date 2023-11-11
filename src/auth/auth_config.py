@@ -15,3 +15,4 @@ async def get_current_user(user_id: int, session: AsyncSession) -> User:
 
 async def validate_token(token: str, secret: str, algorithms: list[str]) -> bool:
     return True
+
