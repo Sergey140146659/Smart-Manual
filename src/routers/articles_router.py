@@ -8,7 +8,6 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from DataBase.Query.query_schemas import QueryCreate
 from DataBase.Query.rate_schemas import Rate, WriteQuestions, IsUseful
-from DataBase.database_config import get_async_session
 from ml.db_creating.db_correction import add_question as add_question_db
 from ml.preprocessing_data.Articles_path import get_path
 from ml.searching.question_list import get_question_list, update_question_list
@@ -23,8 +22,7 @@ router = APIRouter(
 @router.post("/get_answer")
 async def answer(new_query: QueryCreate,
                  request: Request,
-                 response: Response,
-                 session: AsyncSession = Depends(get_async_session)):
+                 response: Response):
     try:
         questions = new_query.questions
         questions_dict = questions.__dict__
@@ -40,8 +38,7 @@ async def answer(new_query: QueryCreate,
 @router.post("/get_answer_without_classification")
 async def answer_without_classification(new_query: QueryCreate,
                                         request: Request,
-                                        response: Response,
-                                        session: AsyncSession = Depends(get_async_session)):
+                                        response: Response):
     try:
         questions = new_query.questions
         questions_dict = questions.__dict__

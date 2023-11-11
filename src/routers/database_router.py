@@ -6,7 +6,6 @@ import zipfile
 from fastapi import File, UploadFile, APIRouter, Request, Response, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from DataBase.database_config import get_async_session
 from ml.db_creating.db_article_update import article_db_update
 from ml.db_creating.db_faq_update import faq_db_update
 from ml.preprocessing_data.Articles_path import get_path
@@ -20,8 +19,7 @@ router = APIRouter(
 @router.post("/upload_db")
 async def create_upload_file(request: Request,
                              response: Response,
-                             file: UploadFile = File(...),
-                             session: AsyncSession = Depends(get_async_session)):
+                             file: UploadFile = File(...)):
     try:
         os.makedirs("ml\\preprocessing_data", exist_ok=True)
         if os.path.isdir(get_path("03.complex-operations")):
