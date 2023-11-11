@@ -2,8 +2,6 @@ from fastapi import APIRouter, Depends, Response
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import Request
 
-from DataBase.Chat.chat_db_operations import get_filtered_chats_db, delete_chat_db
-from DataBase.Chat.chat_schemas import ChatSearch
 from DataBase.System.system_db_operations import add_system_db, delete_system_db, auth_system_db, get_all_systems_db, \
     get_system_types
 from DataBase.System.system_schemas import SystemCreate, SystemAuth
@@ -29,29 +27,6 @@ async def add_system(new_system: SystemCreate,
             return {"status": "Unauthorized user."}
         access_token = await add_system_db(new_system, session)
         return {"access_token": access_token}
-    except Exception as e:
-        response.status_code = 500
-        return {"status": "error", "message": str(e)}
-
-
-@router.delete("/delete_system/{system_id}")
-async def delete_system(system_id: int,
-                        response: Response,
-                        request: Request,
-                        session: AsyncSession = Depends(get_async_session)):
-    try:
-        access_token = request.cookies.get("access_token")
-        if not await validate_token(access_token, JWT_SECRET, JWT_ALGORITHM):
-            return {"status": "Unauthorized user."}
-
-        chat_params = ChatSearch(systemId=system_id)
-        chats_list = await get_filtered_chats_db(chat_params, session)
-        if chats_list != None:
-            for chat in chats_list:
-                await delete_chat_db(chat.id, session)
-
-        await delete_system_db(system_id, session)
-        return {"status": "success"}
     except Exception as e:
         response.status_code = 500
         return {"status": "error", "message": str(e)}

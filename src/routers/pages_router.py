@@ -39,11 +39,6 @@ def get_admin_systems_page(request: Request, authenticated: bool = Depends(check
         return RedirectResponse(url="/pages/login")
     return templates.TemplateResponse("admin_systems.html", {"request": request})
 
-@router.get("/admin_chats")
-def get_admin_chats_page(request: Request, authenticated: bool = Depends(check_authentication)):
-    if (not authenticated):
-        return RedirectResponse(url="/pages/login")
-    return templates.TemplateResponse("admin_chats.html", {"request": request})
 
 @router.get("/admin_users")
 def get_user_list_page(request: Request, authenticated: bool = Depends(check_authentication)):
