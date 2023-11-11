@@ -1,0 +1,59 @@
+{% extends "bases/admin.html" %}
+
+
+{% block head %}
+
+<script src="../static/scripts/users-list-scripts.js"></script>
+<title>Smart Search - Users List</title>
+
+{% endblock %}
+
+{% block content %}
+
+<section class="admin-content">
+    <div class="container flex flex-col items-center">
+        <div class="add_user">
+            <button class="add_user_button" type="button">Добавить пользователя</button>
+        </div>
+        <table class="admin_list users-list">
+            <thead class="admin_table_head">
+                <tr>
+                    <th class="user_id">ID</th>
+                    <th class="user_email">Email</th>
+                    <th class="user_username">Username</th>
+                    <th class="user_is_superuser">Is Superuser</th>
+                    <th class="user_change">Change</th>
+                    <th class="user_delete">Delete</th>
+                </tr>
+            </thead>
+            <tbody class="users-list-body">
+            </tbody>
+        </table>
+    </div>
+    <div class="modal hidden close-modal-area add_user_modal">
+        <div class="modal_window">
+            <h1 class="modal_window_header">Добавление Пользователя</h1>
+            <form method="post" id="add_user_form">
+                <div class="input-block">
+                    <label for="email">Email</label>
+                    <input class="add_system_input" type="text" id="email" name="email" required value="email@mail.ru">
+                </div>
+                <div class="input-block">
+                    <label for="password">Пароль</label>
+                    <input class="add_system_input" type="text" id="password" name="password" required value="password">
+                </div>
+                <div class="input-block">
+                    <label for="username">Имя пользователя</label>
+                    <input class="add_system_input" type="text" id="username" name="username" required value="Username">
+                </div>
+                <div class="input-block checkbox-block">
+                    <label for="is_superuser">Админ</label>
+                    <input class="add_system_input admin_checkbox" type="checkbox" id="is_superuser" name="is_superuser">
+                </div>
+                <button class="add_system_submit admin_form_submit" type="submit">Отправить</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

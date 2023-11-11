@@ -1,0 +1,30 @@
+{% extends "bases/admin.html" %}
+
+
+{% block head %}
+
+<link rel="stylesheet" href="../static/styles/admin_bd_upload.css">
+<script src="../static/scripts/admin-bd-upload.js"></script>
+<title>Smart Search - Admin DataBase Upload</title>
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="db-upload">
+    <div class="container">
+        <form class="db-upload__form">
+            <label class="form__db-file-label" for="file">Загрузите zip-архив с базой данных</label>
+            <input class="form__db-file-input" type="file" id="file" name="file" accept=".zip" />
+            <div class="form__send-block">
+                <button class="form__submit" type="submit">
+                    Отправить
+                </button>
+                <div class="form__ans-message"></div>
+            </div>
+        </form>
+    </div>
+</section>
+
+{% endblock %}
