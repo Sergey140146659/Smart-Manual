@@ -2,7 +2,6 @@ from classification.classifier_model import classifier
 from random import randint
 from ml.request_processing.request_reduction import request_processing
 
-from ml.searching.search_article import searching_tf_idf, searching_bm25
 from ml.searching.search_faq import searching_tf_idf_faq, searching_bm25_faq
 
 

@@ -5,64 +5,61 @@ import json
 from ml.preprocessing_data.Articles_path import get_path
 
 
-def searching_tf_idf_faq(request, top_n=5):
+def searching_tf_idf_faq(path, request, top_n=5):
     '''
      Функция использует сохраненный ранее корпус статей и матрицу TF-IDF для вычисления косинусной схожести между
      запросом и каждой статьей в корпусе. Затем она выбирает top_n наиболее релевантных статей
      и возвращает их в виде списка словарей
     '''
-    with open(get_path("faq.json"), 'r', encoding='utf-8') as f:
-        all_faq = json.load(f)
+    with open(get_path(path), 'r', encoding='utf-8') as f:
+        subject = json.load(f)
 
-    combined_articles = all_faq["faq_combined_text"]
+    combined_articles = subject["combined_text_of_sections"]
     combined_vectorizer = TfidfVectorizer()
     combined_matrix = combined_vectorizer.fit_transform(combined_articles)
 
     request_tfidf = combined_vectorizer.transform([request])
     cosine_similarities = cosine_similarity(request_tfidf, combined_matrix)
     indices = cosine_similarities.argsort()[0][-top_n:]
-    faq = []
+    subject = []
     for index in indices:
-        faq_i = {
-            "faq_name": all_faq["faq_name"][index],
-            "faq_text": all_faq["faq_text"][index],
-            "faq_lemma_text": all_faq["faq_lemma_text"][index],
-            "faq_combined_text": all_faq["faq_combined_text"][index],
-            "faq_link": all_faq["faq_link"][index],
-            "faq_paragraphs": all_faq["faq_paragraphs"][index],
-            "faq_lemma_paragraphs": all_faq["faq_lemma_paragraphs"][index],
-            "faq_combined_paragraphs": all_faq["faq_combined_paragraphs"][index]
+        subject_i = {
+            "sections": subject["sections"][index],
+            "pages_number_of_sections": subject["pages_number_of_sections"][index],
+            "text_of_sections": subject["text_of_sections"][index],
+            "lemma_text_of_sections": subject["lemma_text_of_sections   "][index],
+            "combined_text_of_sections": subject["combined_text_of_sections"][index],
+            "path_to_pdf": subject["path_to_pdf"][index]
         }
 
-        faq.append(faq_i)
-    return faq
+        subject.append(subject_i)
+    return subject
 
 
-def searching_bm25_faq(request, top_n=5):
+def searching_bm25_faq(path, request, top_n=5):
     '''
     Функция использует сохраненный ранее корпус статей и модель BM25 для вычисления баллов релевантности
     между запросом и каждой статьей в корпусе. Затем она выбирает top_n наиболее релевантных статей
     и возвращает их в виде списка словарей.
     '''
-    with open(get_path("faq.json"), 'r', encoding='utf-8') as f:
-        all_faq = json.load(f)
-    combined_articles = all_faq["faq_combined_text"]
+    with open(get_path(path), 'r', encoding='utf-8') as f:
+        subject = json.load(f)
+    combined_articles = subject["combined_text_of_sections"]
     tokenized_combined = [doc.split(" ") for doc in combined_articles]
     bm25_combined = BM25Okapi(tokenized_combined)
     tokenized_question = request.split(" ")
     doc_scores = bm25_combined.get_scores(tokenized_question)
     sorted_doc_indices = sorted(range(len(doc_scores)), key=lambda i: doc_scores[i], reverse=True)[:top_n]
-    faq = []
+    subject = []
     for index in sorted_doc_indices:
-        faq_i = {
-            "faq_name": all_faq["faq_name"][index],
-            "faq_text": all_faq["faq_text"][index],
-            "faq_lemma_text": all_faq["faq_lemma_text"][index],
-            "faq_combined_text": all_faq["faq_combined_text"][index],
-            "faq_link": all_faq["faq_link"][index],
-            "faq_paragraphs": all_faq["faq_paragraphs"][index],
-            "faq_lemma_paragraphs": all_faq["faq_lemma_paragraphs"][index],
-            "faq_combined_paragraphs": all_faq["faq_combined_paragraphs"][index]
+        subject_i = {
+            "sections": subject["sections"][index],
+            "pages_number_of_sections": subject["pages_number_of_sections"][index],
+            "text_of_sections": subject["text_of_sections"][index],
+            "lemma_text_of_sections": subject["lemma_text_of_sections   "][index],
+            "combined_text_of_sections": subject["combined_text_of_sections"][index],
+            "path_to_pdf": subject["path_to_pdf"][index]
         }
-        faq.append(faq_i)
-    return faq
+
+        subject.append(subject_i)
+    return subject

@@ -46,9 +46,7 @@ def create_subject(obj):
     # themes
     # path
     if check_sub(obj['name']) != 0:
-        with open(
-                "C:\\Users\sega2.DESKTOP-9LR65AQ\PycharmProjects\Smart-Manual\src\ml\preprocessing_data\subjects.json",
-                'r') as file:
+        with open(obj['path'], 'r') as file:
             data = json.load(file)
         index = check_sub(obj['name'])
         json_name = data['json_name'][index]
@@ -58,15 +56,12 @@ def create_subject(obj):
             theme, pages = info[0], info[1]
             subject_info['sections'].append(theme)
             subject_info['pages_number_of_sections'].append(pages)
-            text = get_text(
-                "C:\\Users\sega2.DESKTOP-9LR65AQ\PycharmProjects\Smart-Manual\src\ml\preprocessing_data\ряды.pdf",
-                pages)
+            text = get_text(['path'], pages)
             subject_info['text_of_sections'].append(text)
             lemma = lemma_text(text)
             subject_info['lemma_text_of_sections'].append(lemma)
             subject_info['combined_text_of_sections'].append(lemma + ' ' + text)
-            subject_info['path_to_pdf'].append(
-                "C:\\Users\sega2.DESKTOP-9LR65AQ\PycharmProjects\Smart-Manual\src\ml\preprocessing_data\ряды.pdf")
+            subject_info['path_to_pdf'].append(obj['path'])
         with open(get_path(json_name), "w") as file:
             json.dump(subject_info, file)
     else:
@@ -95,21 +90,13 @@ def create_subject(obj):
             theme, pages = info[0], info[1]
             subject_info['sections'].append(theme)
             subject_info['pages_number_of_sections'].append(pages)
-            text = get_text(
-                "C:\\Users\sega2.DESKTOP-9LR65AQ\PycharmProjects\Smart-Manual\src\ml\preprocessing_data\ряды.pdf",
-                pages)
+            text = get_text(obj['path'], pages)
             subject_info['text_of_sections'].append(text)
             lemma = lemma_text(text)
             subject_info['lemma_text_of_sections'].append(lemma)
             subject_info['combined_text_of_sections'].append(lemma + ' ' + text)
-            subject_info['path_to_pdf'].append("C:\\Users\sega2.DESKTOP-9LR65AQ\PycharmProjects\Smart-Manual\src\ml\preprocessing_data\ряды.pdf")
+            subject_info['path_to_pdf'].append(obj['path'])
         print(subject_info)
         with open(get_path(json_name), "w") as file:
             json.dump(subject_info, file)
 
-
-create_subject({
-    "name": "матан",
-    "themes": [["все", "1"]],
-    "path": ''
-})
