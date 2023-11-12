@@ -41,8 +41,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
 // Subject Add Form
 
-    const subjectFormDOM = document.querySelector(".add-subject-form");
-    subjectFormDOM.addEventListener('submit', (e) => {
+    const subjectAddFormDOM = document.querySelector(".add-subject-form");
+    subjectAddFormDOM.addEventListener('submit', (e) => {
         e.preventDefault();
         const subjectNameInput = document.querySelector('.subject-form__input');
         const newSubjectName = subjectNameInput.value;
