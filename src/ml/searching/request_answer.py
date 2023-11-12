@@ -1,5 +1,10 @@
+import json
+
 from classification.classifier_model import classifier
 from random import randint
+
+from ml.preprocessing_data.Articles_path import get_path
+from ml.preprocessing_data.check_subject import check_sub
 from ml.request_processing.request_reduction import request_processing
 
 from ml.searching.search import searching_tf_idf_faq
@@ -20,7 +25,29 @@ understand = [
 ]
 
 
-def search_all(request):
+def get_answer(subject, request):
     process_request = request_processing(request)
     request = request + ' ' + process_request
-    answer = searching_tf_idf_faq(request)
+    with open(get_path('subjects.json'), 'r') as file:
+        data = json.load(file)
+    index = check_sub(subject)
+    json_name = data['json_name'][index]
+    subs = searching_tf_idf_faq(json_name, request)
+    answer = []
+    for sub in subs:
+        pages = sub['pages_number_of_sections']
+        page_start = 0
+        page_end = 0
+        page_number = pages.replace(' ', '')
+        if '-' not in page_number:
+            page_start = int(page_number)
+            page_end = int(page_number)
+        else:
+            page_start, page_end = int(page_number.split('-')[0]), int(page_number.split('-')[1])
+        answer.append({
+            'theme_name': sub['sections'],
+            'pdf_name': sub['path_to_pdf'],
+            'page_start': page_start,
+            'page_end': page_end
+        })
+    return answer
