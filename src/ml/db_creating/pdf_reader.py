@@ -4,8 +4,6 @@ import re
 from PyPDF2 import PdfReader
 
 from ml.preprocessing_data.Articles_path import get_path
-from ml.request_processing.lemmatization import lemma_text
-from src.ml.preprocessing_data.check_subject import check_sub, create_sub_name
 
 str_to_replace = "!«»\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~\t\n\r\x0b\x0c\x0a\xa0–qwertyiopasdfghjklzxcvbnm"
 

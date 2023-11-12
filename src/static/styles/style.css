@@ -919,17 +919,17 @@ body {
 }
 
 .success_message {
-    padding: 5px 10px;
-    border-radius: 30px;
-    background-color: #90dd99;
-    color: #178223;
+    padding: 10px 20px;
+    border-radius: 12px;
+    background-color: #cfe8d0;
+    color: #7bc080;
 }
 
 .error_message {
-    padding: 5px 10px;
-    border-radius: 30px;
-    background-color: #dd6759;
-    color: #901a0c;
+    padding: 8px 20px;
+    border-radius: 12px;
+    background-color: #fde4e4;
+    color: #f87c7c;
 }
 
 .article_item_choose_button {

@@ -6,7 +6,7 @@ from PyPDF2 import PdfReader
 from ml.db_creating.pdf_reader import get_text
 from ml.preprocessing_data.Articles_path import get_path
 from ml.request_processing.lemmatization import lemma_text
-from src.ml.preprocessing_data.check_subject import check_sub, create_sub_name
+from ml.preprocessing_data.check_subject import check_sub, create_sub_name
 
 
 

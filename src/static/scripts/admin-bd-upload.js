@@ -36,10 +36,10 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
 
-let subjectTargetName = '';
+    let subjectTargetName = '';
 
 
-//  Add Subject Form
+// Subject Add Form
 
     const subjectFormDOM = document.querySelector(".add-subject-form");
     subjectFormDOM.addEventListener('submit', (e) => {
@@ -47,20 +47,21 @@ let subjectTargetName = '';
         const subjectNameInput = document.querySelector('.subject-form__input');
         const newSubjectName = subjectNameInput.value;
 
-        createSubjectDOM(newSubjectName);
+        const subjectItemDOM = createSubjectDOM(newSubjectName);
+        chooseSubject(subjectItemDOM.querySelector('button'));
         subjectNameInput.value = '';
     });
 
     function createSubjectDOM (subjectName) {
-        const subjectsList = document.querySelector('.loaded-db__list');
+        const subjectsListDOM = document.querySelector('.loaded-db__list');
 
         const newSubject = document.createElement('li');
         newSubject.classList.add('loaded-db__item');
         newSubject.innerHTML = `
             <button type="button" class="loaded-db__item__button">${subjectName}</button>
         `;
-        subjectsList.append(newSubject);
-        chooseSubject(newSubject.querySelector('button'));
+        subjectsListDOM.append(newSubject);
+        return newSubject;
     }
 
 
@@ -80,33 +81,62 @@ let subjectTargetName = '';
     }
 
 
-//  Upload Subject DataBase
+//  Send Subject Form
 
-    const dbForm = document.querySelector('.upload-file-form');
-    dbForm.addEventListener('submit', async (e) => {
+    const subjectFormDOM = document.querySelector('.subject-form');
+    subjectFormDOM.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const fileInput = dbForm.querySelector('.upload-file-form__input');
-        const formData = new FormData(dbForm);
-        formData.append('subject', subjectTargetName);
 
-        const response = await fetch('/db/subject_db_upload', {
-            method: 'POST',
-            body: formData
-        })
-        .then(data => {
-            if (data.ok) {
-//                ansMessage.innerHTML = `
-//                    <span class="success_message">Успешно</span>
-//                `;
-                console.log('ok');
-            } else {
-//                ansMessage.innerHTML = `
-//                    <span class="error_message">Ошибка</span>
-//                `;
-                console.log('err');
-            }
-            fileInput.value = null;
-        });
     });
+
+
+//  Get Subject List
+
+    async function getSubjectList () {
+        const subjectsList = await getRequest('../db/subject_list');
+        clearSubjectListDOM();
+        buildSubjectListDOM(subjectsList);
+    }
+    getSubjectList();
+
+    function buildSubjectListDOM (subjectList) {
+        for (subjectName of subjectList) {
+            createSubjectDOM(subjectName);
+        }
+    }
+
+    function clearSubjectListDOM () {
+        const subjectListDOM = document.querySelector('.loaded-db__list');
+        subjectListDOM.innerHTML = '';
+    }
+
+
+//  Add Theme DOM
+
+    const addThemeButton = document.querySelector('.subject__add-theme-button');
+    addThemeButton.addEventListener('click', () => {
+        const subjectFormDOM = document.querySelector('.subject-form');
+        const buttonsGroup = document.querySelector('.subject__buttons-group');
+        const themeInputsGroup = document.createElement('div');
+        themeInputsGroup.classList.add('theme-inputs-group');
+        themeInputsGroup.innerHTML = `
+            <label class="d-none" for="theme">Название темы</label>
+            <input class="subject-form__input" type="text" id="theme" name="theme" placeholder="Название темы" autocomplete="off">
+            <div class="number-inputs">
+                <label class="d-none" for="start-page-num">Первая страница</label>
+                <input class="subject-form__input page-num__input" type="number" id="start-page-num" name="start-page-num" placeholder="12" autocomplete="off">
+                <span class="page-num__dash">—</span>
+                <label class="d-none" for="end-page-num">Последняя страница</label>
+                <input class="subject-form__input page-num__input" type="number" id="end-page-num" name="end-page-num" placeholder="16" autocomplete="off">
+            </div>
+            <button type="button" class="theme__delete-button">✕</button>
+        `;
+        const deleteButtonDOM = themeInputsGroup.querySelector('.theme__delete-button');
+        deleteButtonDOM.addEventListener('click', () => {
+             themeInputsGroup.remove();
+        });
+        subjectFormDOM.insertBefore(themeInputsGroup, buttonsGroup);
+    });
+
 
 });
