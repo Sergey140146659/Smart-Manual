@@ -11,7 +11,7 @@ str_to_replace = "!«»\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~\t\n\r\x0b\x0c\x0a\xa0�
 
 
 def extract_text_from_pdf(pdf_file_path, page_number):
-    with open(pdf_file_path, 'rb') as file:
+    with open(get_path(pdf_file_path), 'rb') as file:
         pdf = PdfReader(file)
         page = pdf.pages[page_number]
         text = page.extract_text()
@@ -53,10 +53,10 @@ def create_subject(obj):
         with open(get_path(json_name), 'r') as file:
             subject_info = json.load(file)
         for info in obj['themes']:
-            theme, pages = info[0], info[1]
+            theme, pages = info["theme_name"], info["pages"]
             subject_info['sections'].append(theme)
             subject_info['pages_number_of_sections'].append(pages)
-            text = get_text(['path'], pages)
+            text = get_text(['path'], pages) + ' ' + theme
             subject_info['text_of_sections'].append(text)
             lemma = lemma_text(text)
             subject_info['lemma_text_of_sections'].append(lemma)
@@ -87,16 +87,34 @@ def create_subject(obj):
         with open(get_path(json_name), 'r') as file:
             subject_info = json.load(file)
         for info in obj['themes']:
-            theme, pages = info[0], info[1]
+            theme, pages = info["theme_name"], info["pages"]
             subject_info['sections'].append(theme)
             subject_info['pages_number_of_sections'].append(pages)
-            text = get_text(obj['path'], pages)
+            text = get_text(obj['path'], pages) + ' ' + theme
             subject_info['text_of_sections'].append(text)
             lemma = lemma_text(text)
             subject_info['lemma_text_of_sections'].append(lemma)
             subject_info['combined_text_of_sections'].append(lemma + ' ' + text)
             subject_info['path_to_pdf'].append(obj['path'])
-        print(subject_info)
+
         with open(get_path(json_name), "w") as file:
             json.dump(subject_info, file)
 
+
+# obj = {"name": "матан",
+#        "themes": [
+#            {"theme_name": "основные понятия", "pages": "1"},
+#            {"theme_name": "свойства рядов", "pages": "2-3"},
+#            {"theme_name": "ряд геометрической прогрессии", "pages": "3-4"},
+#            {"theme_name": "гармонический ряд", "pages": "4-6"},
+#            {"theme_name": "Необходимый признак сходимости", "pages": "7"},
+#            {"theme_name": "признаки сравнения", "pages": "8-12"},
+#            {"theme_name": "признак даламбера", "pages": "13-15"},
+#            {"theme_name": "радикальный признак коши", "pages": "16-17"},
+#            {"theme_name": "интегральный признак коши", "pages": "18"},
+#            {"theme_name": "Признак лейбиница", "pages": "19-21"},
+#            {"theme_name": "Абсолютная и условная сходимость", "pages": "22-25"}
+#        ],
+#        "path": "ряды.pdf"
+#        }
+# create_subject(obj)
