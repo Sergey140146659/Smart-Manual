@@ -9,6 +9,7 @@ from ml.request_processing.lemmatization import lemma_text
 from src.ml.preprocessing_data.check_subject import check_sub, create_sub_name
 
 
+
 def create_subject(obj):
     # name
     # themes
@@ -30,6 +31,8 @@ def create_subject(obj):
             subject_info['lemma_text_of_sections'].append(lemma)
             subject_info['combined_text_of_sections'].append(lemma + ' ' + text)
             subject_info['path_to_pdf'].append(obj['path'])
+            subject_info['questions'].append([])
+            subject_info['lemma_questions'].append([])
         with open(get_path(json_name), "w") as file:
             json.dump(subject_info, file)
     else:
@@ -38,8 +41,7 @@ def create_subject(obj):
             data = json.load(file)
         data['json_name'].append(json_name)
         data['orig_name'].append(obj['name'])
-        data['questions'].append([])
-        data['lemma_questions'].append([])
+
         with open(get_path('subjects.json'), "w") as file:
             json.dump(data, file)
 
@@ -49,7 +51,9 @@ def create_subject(obj):
             "text_of_sections": [],
             "lemma_text_of_sections": [],
             "combined_text_of_sections": [],
-            "path_to_pdf": []
+            "path_to_pdf": [],
+            "questions": [],
+            "lemma_questions": []
         }
         with open(get_path(json_name), "w") as file:
             json.dump(sub_info, file)
@@ -66,6 +70,7 @@ def create_subject(obj):
             subject_info['lemma_text_of_sections'].append(lemma)
             subject_info['combined_text_of_sections'].append(lemma + ' ' + text)
             subject_info['path_to_pdf'].append(obj['path'])
-
+            subject_info['questions'].append([])
+            subject_info['lemma_questions'].append([])
         with open(get_path(json_name), "w") as file:
             json.dump(subject_info, file)
