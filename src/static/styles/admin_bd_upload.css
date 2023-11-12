@@ -78,13 +78,14 @@ input::-webkit-inner-spin-button {
 }
 
 .upload-file-form {
-    margin-bottom: 50px;
+    margin-bottom: 40px;
     display: flex;
     align-items: center;
+    gap: 15px;
 }
 
 .upload-file-form__input {
-    width: 300px;
+    width: 280px;
 }
 
 .upload-file-form__submit {
@@ -106,6 +107,7 @@ input::-webkit-inner-spin-button {
     display: flex;
     align-items: center;
     gap: 20px;
+    margin: 10px 0;
 }
 
 .subject-form__input {
