@@ -19,7 +19,7 @@
             <div class="loaded-db">
                 <ul class="loaded-db__list">
                     <li class="loaded-db__item">
-                        <button type="button" class="loaded-db__item__button active">Матанализ</button>
+                        <button type="button" class="loaded-db__item__button">Матанализ</button>
                     </li>
                     <li class="loaded-db__item">
                         <button type="button" class="loaded-db__item__button">Объектно ориентированное программирование</button>
@@ -29,7 +29,7 @@
                 <h2 class="subtitle">Добавление предмета</h2>
                 <form class="add-subject-form">
                     <label class="d-none" for="subject">Название предмета</label>
-                    <input class="subject-form__input" type="text" id="subject" name="subject" placeholder="Название предмета">
+                    <input class="subject-form__input" type="text" id="subject" name="subject" placeholder="Название предмета" autocomplete="off">
                     <button class="add-subject-form__submit" type="submit">+</button>
                 </form>
             </div>
@@ -46,13 +46,13 @@
                 <form class="subject-form">
                     <div class="theme-inputs-group">
                         <label class="d-none" for="theme">Название темы</label>
-                        <input class="subject-form__input" type="text" id="theme" name="theme" placeholder="Название темы">
+                        <input class="subject-form__input" type="text" id="theme" name="theme" placeholder="Название темы" autocomplete="off">
                         <div class="number-inputs">
                             <label class="d-none" for="start-page-num">Первая страница</label>
-                            <input class="subject-form__input page-num__input" type="number" id="start-page-num" name="start-page-num" placeholder="12">
+                            <input class="subject-form__input page-num__input" type="number" id="start-page-num" name="start-page-num" placeholder="12" autocomplete="off">
                             <span class="page-num__dash">—</span>
                             <label class="d-none" for="end-page-num">Последняя страница</label>
-                            <input class="subject-form__input page-num__input" type="number" id="end-page-num" name="end-page-num" placeholder="16">
+                            <input class="subject-form__input page-num__input" type="number" id="end-page-num" name="end-page-num" placeholder="16" autocomplete="off">
                         </div>
                         <button type="button" class="theme__delete-button">✕</button>
                     </div>

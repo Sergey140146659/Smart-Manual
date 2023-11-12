@@ -2,7 +2,6 @@ import pickle
 
 from fastapi import APIRouter, Response, Request
 
-from DataBase.Query.rate_schemas import WriteQuestions
 from ml.preprocessing_data.Articles_path import get_path
 
 router = APIRouter(
@@ -47,7 +46,6 @@ async def get_article_question_list(article_name,
 
 
 @router.post("/write_questions")
-async def post_rate(new_write: WriteQuestions,
-                    request: Request,
+async def post_rate(request: Request,
                     response: Response):
     return 0

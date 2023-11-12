@@ -12,3 +12,8 @@ router = APIRouter(
     prefix="/db",
     tags=["DataBase"]
 )
+
+
+@router.post("/write_questions")
+async def post_rate():
+    return 0
