@@ -15,6 +15,7 @@ def searching_tf_idf_faq(path, request, top_n=5):
         subject = json.load(f)
 
     combined_articles = subject["combined_text_of_sections"]
+
     combined_vectorizer = TfidfVectorizer()
     combined_matrix = combined_vectorizer.fit_transform(combined_articles)
 

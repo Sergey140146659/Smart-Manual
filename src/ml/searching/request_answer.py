@@ -2,7 +2,7 @@ from classification.classifier_model import classifier
 from random import randint
 from ml.request_processing.request_reduction import request_processing
 
-from ml.searching.search_faq import searching_tf_idf_faq
+from ml.searching.search import searching_tf_idf_faq
 
 dont_understand = ["Простите, я не уверен, что вы имеете в виду. Можете объяснить более подробно?",
                    "Извините, я не распознал ваш запрос. Можете повторить его?",
