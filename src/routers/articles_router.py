@@ -1,15 +1,9 @@
-import json
 import pickle
-from datetime import datetime
 
-import pytz
-from fastapi import APIRouter, Depends, Response, Request
-from sqlalchemy.ext.asyncio import AsyncSession
+from fastapi import APIRouter, Response, Request
 
-from DataBase.Query.query_schemas import QueryCreate
-from DataBase.Query.rate_schemas import Rate, WriteQuestions, IsUseful
+from DataBase.Query.rate_schemas import WriteQuestions
 from ml.preprocessing_data.Articles_path import get_path
-from ml.searching.question_list import get_question_list, update_question_list
 
 router = APIRouter(
     prefix="/article",
@@ -49,24 +43,11 @@ async def get_faq_list(response: Response):
 @router.get("/get_article_question_list")
 async def get_article_question_list(article_name,
                                     response: Response):
-    try:
-
-        question_list = get_question_list(article_name)
-        return question_list
-    except Exception as e:
-        response.status_code = 500
-        return {"status": "error", "message": str(e)}
-
-
+    return 0
 
 
 @router.post("/write_questions")
 async def post_rate(new_write: WriteQuestions,
                     request: Request,
                     response: Response):
-    try:
-        update_question_list(new_write.article_name, new_write.query_list)
-        return {"status": "success"}
-    except Exception as e:
-        response.status_code = 500
-        return {"status": "error", "message": str(e)}
+    return 0

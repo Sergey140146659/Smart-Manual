@@ -13,17 +13,49 @@
 {% block content %}
 
 <section class="db-upload">
-    <div class="container">
-        <form class="db-upload__form">
-            <label class="form__db-file-label" for="file">Загрузите zip-архив с базой данных</label>
-            <input class="form__db-file-input" type="file" id="file" name="file" accept=".zip" />
-            <div class="form__send-block">
-                <button class="form__submit" type="submit">
-                    Отправить
-                </button>
-                <div class="form__ans-message"></div>
+    <div class="db-upload__inner container">
+        <h1 class="title">База данных</h1>
+        <div class="db-upload__content">
+            <div class="loaded-db">
+                <ul class="loaded-db__list">
+                    <li class="loaded-db__item">
+                        <button type="button" class="loaded-db__item__button active">Матанализ</button>
+                    </li>
+                    <li class="loaded-db__item">
+                        <button type="button" class="loaded-db__item__button">Объектно ориентированное программирование</button>
+                    </li>
+                </ul>
             </div>
-        </form>
+            <div class="db-content">
+                <h2 class="subtitle">Файл</h2>
+                <form class="upload-file-form">
+                    <label class="d-none" for="subject-file">Загрузить файл</label>
+                    <input class="upload-file-form__input" type="file" name="subject-file" id="subject-file">
+                    <button type="submit" class="upload-file-form__submit">
+                        <img class="upload-file-form__submit__img" src="../static/images/arrow-up.svg" alt="">
+                    </button>
+                </form>
+                <h2 class="subtitle">Темы</h2>
+                <form class="subject-form">
+                    <div class="theme-inputs-group">
+                        <label class="d-none" for="theme">Название темы</label>
+                        <input class="subject-form__input" type="text" id="theme" name="theme" placeholder="Название темы">
+                        <div class="number-inputs">
+                            <label class="d-none" for="start-page-num">Первая страница</label>
+                            <input class="subject-form__input page-num__input" type="number" id="start-page-num" name="start-page-num" placeholder="12">
+                            <span class="page-num__dash">—</span>
+                            <label class="d-none" for="end-page-num">Последняя страница</label>
+                            <input class="subject-form__input page-num__input" type="number" id="end-page-num" name="end-page-num" placeholder="16">
+                        </div>
+                        <button type="button" class="theme__delete-button">✕</button>
+                    </div>
+                    <div class="subject__buttons-group">
+                        <button type="button" class="subject__add-theme-button">Добавить тему</button>
+                        <button type="submit" class="subject__send-theme-button">Загрузить темы</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </section>
 
