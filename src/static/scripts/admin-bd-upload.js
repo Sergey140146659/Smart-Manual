@@ -38,6 +38,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 let subjectTargetName = '';
 
+
 //  Add Subject Form
 
     const subjectFormDOM = document.querySelector(".add-subject-form");
@@ -77,4 +78,35 @@ let subjectTargetName = '';
             activeButton.classList.remove('active');
         }
     }
+
+
+//  Upload Subject DataBase
+
+    const dbForm = document.querySelector('.upload-file-form');
+    dbForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const fileInput = dbForm.querySelector('.upload-file-form__input');
+        const formData = new FormData(dbForm);
+        formData.append('subject', subjectTargetName);
+
+        const response = await fetch('/db/subject_db_upload', {
+            method: 'POST',
+            body: formData
+        })
+        .then(data => {
+            if (data.ok) {
+//                ansMessage.innerHTML = `
+//                    <span class="success_message">Успешно</span>
+//                `;
+                console.log('ok');
+            } else {
+//                ansMessage.innerHTML = `
+//                    <span class="error_message">Ошибка</span>
+//                `;
+                console.log('err');
+            }
+            fileInput.value = null;
+        });
+    });
+
 });

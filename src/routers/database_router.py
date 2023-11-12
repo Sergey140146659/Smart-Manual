@@ -1,12 +1,4 @@
-import os
-import shutil
-import time
-import zipfile
-
-from fastapi import File, UploadFile, APIRouter, Request, Response, Depends
-from sqlalchemy.ext.asyncio import AsyncSession
-
-from ml.preprocessing_data.Articles_path import get_path
+from fastapi import File, UploadFile, APIRouter, Form
 
 router = APIRouter(
     prefix="/db",
@@ -14,6 +6,7 @@ router = APIRouter(
 )
 
 
-@router.post("/write_questions")
-async def post_rate():
-    return 0
+@router.post("/subject_db_upload")
+async def subject_db_upload(subject: str = Form(...), subject_file: UploadFile = File(...)):
+    print({"filename": subject_file.filename, "subject": subject})
+    return {"filename": subject_file.filename, "subject": subject}
