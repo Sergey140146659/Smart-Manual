@@ -13,7 +13,7 @@ def create_subject(obj):
     # name
     # themes
     # path
-    if check_sub(obj['name']) != 0:
+    if check_sub(obj['name']) is not None:
         with open(obj['path'], 'r') as file:
             data = json.load(file)
         index = check_sub(obj['name'])
@@ -78,7 +78,7 @@ def create_subject(obj):
             json.dump(subject_info, file)
 
 # obj = {
-#     "name": "Матан",
+#     "name": "Математический анализ",
 #     "themes": [
 #         {"theme_name": "test", "page_start": 1, "page_end": 1}
 #     ],
