@@ -86,9 +86,21 @@ window.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         const messageInput = messageFormDOM.querySelector('.request_input');
         const message = messageInput.value;
+        createUserMessage(message);
 
         const url = `../answer/get_answer?subject_name=${subjectTargetName}&request=${message}`
         const response = await getRequest(url);
         console.log(response);
     });
+
+
+//  Crete Message
+
+    function createUserMessage (message) {
+        const messageBlockDOM = document.querySelector('.prev_messages_block');
+        const messageDOM = document.createElement('div');
+        messageDOM.classList.add('user_message');
+        messageDOM.textContent = message;
+        messageBlockDOM.append(messageDOM);
+    }
 });
