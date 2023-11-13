@@ -89,8 +89,7 @@ window.addEventListener('DOMContentLoaded', () => {
         createUserMessage(message);
 
         const url = `../answer/get_answer?subject_name=${subjectTargetName}&request=${message}`
-        const response = await getRequest(url);
-        console.log(response);
+        await createBotMessage(getRequest(url));
     });
 
 
@@ -102,5 +101,36 @@ window.addEventListener('DOMContentLoaded', () => {
         messageDOM.classList.add('user_message');
         messageDOM.textContent = message;
         messageBlockDOM.append(messageDOM);
+    }
+
+    async function createBotMessage (promise) {
+        const messageBlockDOM = document.querySelector('.prev_messages_block');
+        const messageDOM = document.createElement('div');
+        messageDOM.classList.add('request_message');
+        messageDOM.innerHTML = `
+            <div class="loader-container">
+                <span class="loader"></span>
+            </div>
+        `;
+        messageBlockDOM.append(messageDOM);
+
+        const message = await promise;
+        console.log(message)
+        if (message.status == 'OK') {
+            messageDOM.innerHTML = `
+                <p>${message.text}</p>
+            `
+            const themeList = document.createElement('ul');
+
+            for (theme of message.data) {
+                themeList.innerHTML += `
+                    <li>
+                        <a class="pdf-link" href="../ml/preprocessing_data/${theme.pdf_name}#page=${theme.page_start}" target="_blank">${theme.theme_name}</a>
+                        <span class="pdf-pages">стр.${theme.page_start}-${theme.page_end}</span>
+                    </li>
+                `;
+            }
+            messageDOM.append(themeList);
+        }
     }
 });

@@ -11,6 +11,7 @@ app = FastAPI(
 )
 
 app.mount("/static", StaticFiles(directory="static", html=True), name="static")
+app.mount("/ml/preprocessing_data", StaticFiles(directory="ml/preprocessing_data", html=True), name="data")
 
 app.include_router(router_answer)
 app.include_router(router_db)
