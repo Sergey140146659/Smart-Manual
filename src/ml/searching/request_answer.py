@@ -38,5 +38,4 @@ def get_answer(subject, request):
             'page_start': sub['page_start'],
             'page_end': sub['page_end']
         })
-    return answer
-
+    return answer[::-1]
