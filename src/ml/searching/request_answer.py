@@ -35,19 +35,10 @@ def get_answer(subject, request):
     subs = searching_tf_idf_faq(json_name, request)
     answer = []
     for sub in subs:
-        pages = sub['pages_number_of_sections']
-        page_start = 0
-        page_end = 0
-        page_number = pages.replace(' ', '')
-        if '-' not in page_number:
-            page_start = int(page_number)
-            page_end = int(page_number)
-        else:
-            page_start, page_end = int(page_number.split('-')[0]), int(page_number.split('-')[1])
         answer.append({
             'theme_name': sub['sections'],
             'pdf_name': sub['path_to_pdf'],
-            'page_start': page_start,
-            'page_end': page_end
+            'page_start': sub['page_start'],
+            'page_end': sub['page_end']
         })
     return answer

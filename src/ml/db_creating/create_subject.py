@@ -9,7 +9,6 @@ from ml.request_processing.lemmatization import lemma_text
 from ml.preprocessing_data.check_subject import check_sub, create_sub_name
 
 
-
 def create_subject(obj):
     # name
     # themes
@@ -22,10 +21,11 @@ def create_subject(obj):
         with open(get_path(json_name), 'r') as file:
             subject_info = json.load(file)
         for info in obj['themes']:
-            theme, pages = info["theme_name"], info["pages"]
+            theme, page_start, page_end = info["theme_name"], info["page_start"], info["page_end"]
             subject_info['sections'].append(theme)
-            subject_info['pages_number_of_sections'].append(pages)
-            text = get_text(['path'], pages) + ' ' + theme
+            subject_info["page_start"].append(page_start)
+            subject_info["page_end"].append(page_end)
+            text = get_text(['path'], page_start, page_end) + ' ' + theme
             subject_info['text_of_sections'].append(text)
             lemma = lemma_text(text)
             subject_info['lemma_text_of_sections'].append(lemma)
@@ -47,7 +47,8 @@ def create_subject(obj):
 
         sub_info = {
             "sections": [],
-            "pages_number_of_sections": [],
+            "pages_start": [],
+            "page_end": [],
             "text_of_sections": [],
             "lemma_text_of_sections": [],
             "combined_text_of_sections": [],
@@ -61,10 +62,11 @@ def create_subject(obj):
         with open(get_path(json_name), 'r') as file:
             subject_info = json.load(file)
         for info in obj['themes']:
-            theme, pages = info["theme_name"], info["pages"]
+            theme, page_start, page_end = info["theme_name"], info["page_start"], info["page_end"]
             subject_info['sections'].append(theme)
-            subject_info['pages_number_of_sections'].append(pages)
-            text = get_text(obj['path'], pages) + ' ' + theme
+            subject_info["page_start"].append(page_start)
+            subject_info["page_end"].append(page_end)
+            text = get_text(obj['path'], page_start,page_end) + ' ' + theme
             subject_info['text_of_sections'].append(text)
             lemma = lemma_text(text)
             subject_info['lemma_text_of_sections'].append(lemma)

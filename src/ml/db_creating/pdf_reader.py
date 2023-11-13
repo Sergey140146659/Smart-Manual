@@ -25,17 +25,11 @@ def extract_text_from_pdf(pdf_file_path, page_number):
         return re.sub(r'[^а-яА-Я0-9\s]', '', text)
 
 
-def get_text(pdf_file_path, page_number):
-    page_number = page_number.replace(' ', '')
-    if '-' not in page_number:
-        return extract_text_from_pdf(pdf_file_path, int(page_number))
-    else:
-        start, finish = int(page_number.split('-')[0]), int(page_number.split('-')[1])
-        start -= 1
-        text = ''
-        for i in range(start, finish):
-            text += ' '
-            text += extract_text_from_pdf(pdf_file_path, i)
-        return text
-
-
+def get_text(pdf_file_path, page_start, page_end):
+    start, finish = page_start, page_end
+    start -= 1
+    text = ''
+    for i in range(start, finish):
+        text += ' '
+        text += extract_text_from_pdf(pdf_file_path, i)
+    return text
