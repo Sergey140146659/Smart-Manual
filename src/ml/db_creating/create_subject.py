@@ -10,9 +10,6 @@ from ml.preprocessing_data.check_subject import check_sub, create_sub_name
 
 
 def create_subject(obj):
-    # name
-    # themes
-    # path
     if check_sub(obj['name']) is not None:
         with open(get_path("subjects.json"), 'r') as file:
             data = json.load(file)
@@ -76,13 +73,3 @@ def create_subject(obj):
             subject_info['lemma_questions'].append([])
         with open(get_path(json_name), "w") as file:
             json.dump(subject_info, file)
-#
-# obj = {
-#     "name": "Математический анализ",
-#     "themes": [
-#         {"theme_name": "test", "page_start": 1, "page_end": 1}
-#     ],
-#     "path": "4_Nesobstvennye_integraly.pdf"
-# }
-#
-# create_subject(obj)
