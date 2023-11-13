@@ -1181,3 +1181,24 @@ body {
     background: rgb(149,164,252);
     background: linear-gradient(159deg, rgba(149,164,252,0.5) 0%, rgba(177,227,255,0.5) 45%, rgba(186,237,189,0.5) 100%);
 }
+
+.instruction {
+    width: fit-content;
+    margin: 30px auto 60px auto;
+    padding: 30px;
+    background-color: #dff3ff;
+    border-radius: 12px;
+    color: rgba(0,0,0,0.62);
+}
+
+.instruction__title {
+    text-align: center;
+    font-weight: 500;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.instruction__list {
+    list-style-type: decimal;
+    margin-left: 15px;
+}

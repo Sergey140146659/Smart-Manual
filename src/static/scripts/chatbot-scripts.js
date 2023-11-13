@@ -69,6 +69,13 @@ window.addEventListener('DOMContentLoaded', () => {
         clearSubjectsActiveButton();
         subjectButtonDOM.classList.add('active');
         subjectTargetName = subjectButtonDOM.textContent;
+        makeInputMessageAvailable();
+    }
+
+    function makeInputMessageAvailable () {
+        const inputMessage = document.querySelector('.request_input');
+        inputMessage.removeAttribute("disabled");
+        inputMessage.setAttribute("placeholder", "Спросите что-нибудь...")
     }
 
     function clearSubjectsActiveButton () {
@@ -82,6 +89,12 @@ window.addEventListener('DOMContentLoaded', () => {
 //  Send Message
 
     const messageFormDOM = document.querySelector('.messanger_form');
+    const messageInputDOM = document.querySelector('.request_input');
+    messageInputDOM.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            messageFormDOM.dispatchEvent(new Event('submit'));
+        }
+    });
     messageFormDOM.addEventListener('submit', async (e) => {
         e.preventDefault();
         const messageInput = messageFormDOM.querySelector('.request_input');
@@ -90,6 +103,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
         const url = `../answer/get_answer?subject_name=${subjectTargetName}&request=${message}`
         await createBotMessage(getRequest(url));
+        messageInput.value = '';
     });
 
 
@@ -113,9 +127,9 @@ window.addEventListener('DOMContentLoaded', () => {
             </div>
         `;
         messageBlockDOM.append(messageDOM);
+        messageBlockDOM.scrollTo(0, messageBlockDOM.scrollHeight);
 
         const message = await promise;
-        console.log(message)
         if (message.status == 'OK') {
             messageDOM.innerHTML = `
                 <p>${message.text}</p>
@@ -131,6 +145,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 `;
             }
             messageDOM.append(themeList);
+            messageBlockDOM.scrollTo(0, messageBlockDOM.scrollHeight);
         }
     }
 });
