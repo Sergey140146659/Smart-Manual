@@ -160,6 +160,10 @@ input::-webkit-inner-spin-button {
     transition: 0.3s;
 }
 
+.subject__send-theme-button:disabled:hover {
+    background-color: #BAEDBD !important;
+}
+
 .subject__send-theme-button:hover {
     background-color: #afd9b2 !important;
 }

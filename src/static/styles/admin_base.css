@@ -46,8 +46,8 @@
     align-items: center;
     position: relative;
     background-color: #fff;
-    border-radius: 12px;
-    margin-right: 3px;
+    border-radius: 9px;
+    margin-right: 10px;
     transition: .3s;
 }
 .navbar__item:hover {
