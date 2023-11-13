@@ -86,13 +86,12 @@ body {
 }
 
 .messanger {
+    height: calc(100vh - 70px);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    width: 916px;
-    position: relative;
     background-color: #fff;
     border-radius: 16px;
+    overflow: hidden;
     -webkit-box-shadow: 0px 11px 40px -10px rgba(34, 60, 80, 0.2);
     -moz-box-shadow: 0px 11px 40px -10px rgba(34, 60, 80, 0.2);
     box-shadow: 0px 11px 40px -10px rgba(34, 60, 80, 0.2);
@@ -448,11 +447,11 @@ body {
 }
 
 .messanger_form {
-    width: 100%;
+    width: calc(100% - 40px);
     position: relative;
-    margin: 20px auto 0 auto;
+    margin: 20px;
+    border-radius: 12px;
     border: 1px solid #f2f2f2;
-    border-radius: 26px;
     overflow: hidden;
     background-color: #fbfbfb;
 }
@@ -485,9 +484,8 @@ body {
 .messanger_send_block {
     width: 100%;
     display: flex;
-    background-color: #f2f2f2;
     padding: 7px;
-    border-radius: 26px;
+    border-radius: 12px;
 }
 
 .send_button_icon {
@@ -498,7 +496,7 @@ body {
     padding-top: 1px;
     padding-right: 1px;
     background-color: #000 !important;
-    border-radius: 26px;
+    border-radius: 9px;
     height: 38px;
     width: 38px;
     display: flex;
@@ -558,7 +556,7 @@ body {
 
 .prev_messages_block {
     width: 100%;
-    height: calc(100vh - 320px);
+    flex-grow: 1;
     overflow-y: scroll;
     padding-right: 20px;
 }
@@ -1125,6 +1123,7 @@ body {
 .messanger__content {
     display: flex;
     width: 100%;
+    flex-grow: 1;
 }
 
 .messanger__subjects {
@@ -1161,4 +1160,10 @@ body {
 
 .messanger__subject-list {
     margin-top: 10px;
+}
+
+.messanger__chat {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }

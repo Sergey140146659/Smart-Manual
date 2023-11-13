@@ -72,10 +72,19 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function clearSubjectsActiveButton () {
-        const activeButton = document.querySelector('.loaded-db__item__button.active');
+        const activeButton = document.querySelector('.subject-list__item__button.active');
         if (activeButton) {
             activeButton.classList.remove('active');
         }
     }
 
+
+//  Send Message
+
+    const messageFormDOM = document.querySelector('.messanger_form');
+    messageFormDOM.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const messageInput = messageFormDOM.querySelector('.request_input');
+        const message = messageInput.value;
+    });
 });

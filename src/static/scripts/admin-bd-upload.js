@@ -87,7 +87,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function clearSubjectsActiveButton () {
-        const activeButton = document.querySelector('.loaded-db__item__button.active');
+        const activeButton = document.querySelector('.subject-list__item__button.active');
         if (activeButton) {
             activeButton.classList.remove('active');
         }
