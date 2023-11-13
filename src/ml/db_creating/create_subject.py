@@ -14,7 +14,7 @@ def create_subject(obj):
     # themes
     # path
     if check_sub(obj['name']) is not None:
-        with open(obj['path'], 'r') as file:
+        with open(get_path("subjects.json"), 'r') as file:
             data = json.load(file)
         index = check_sub(obj['name'])
         json_name = data['json_name'][index]
@@ -25,7 +25,7 @@ def create_subject(obj):
             subject_info['sections'].append(theme)
             subject_info["page_start"].append(page_start)
             subject_info["page_end"].append(page_end)
-            text = get_text(['path'], page_start, page_end) + ' ' + theme
+            text = get_text(obj['path'], page_start, page_end) + ' ' + theme
             subject_info['text_of_sections'].append(text)
             lemma = lemma_text(text)
             subject_info['lemma_text_of_sections'].append(lemma)
@@ -76,13 +76,13 @@ def create_subject(obj):
             subject_info['lemma_questions'].append([])
         with open(get_path(json_name), "w") as file:
             json.dump(subject_info, file)
-
+#
 # obj = {
 #     "name": "Математический анализ",
 #     "themes": [
 #         {"theme_name": "test", "page_start": 1, "page_end": 1}
 #     ],
-#     "path": "ряды.pdf"
+#     "path": "4_Nesobstvennye_integraly.pdf"
 # }
 #
 # create_subject(obj)
