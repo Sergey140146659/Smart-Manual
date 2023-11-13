@@ -87,7 +87,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const messageInput = messageFormDOM.querySelector('.request_input');
         const message = messageInput.value;
 
-        const url = `../answer/get_answer?subject_name=${subjectTargetName}&request=&{message}`
+        const url = `../answer/get_answer?subject_name=${subjectTargetName}&request=${message}`
         const response = await getRequest(url);
         console.log(response);
     });
