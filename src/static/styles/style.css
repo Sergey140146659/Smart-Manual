@@ -388,6 +388,7 @@ body {
 
 .chatbot-container {
     padding-top: 30px;
+    min-width: 1000px;
 }
 
 .chats_list_block {
