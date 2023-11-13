@@ -73,7 +73,7 @@ def remove_non_letters(text):
     return text
 
 
-article_trie = Trie()  # префиксное дерево, в котором содержатся все слова из статей на helpgznext
+article_trie = Trie()  # префиксное дерево, в котором содержатся все слова из статей
 
 
 def check_word(word):
