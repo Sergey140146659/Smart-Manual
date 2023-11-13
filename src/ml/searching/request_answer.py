@@ -1,8 +1,5 @@
 import json
 
-from classification.classifier_model import classifier
-from random import randint
-
 from ml.preprocessing_data.Articles_path import get_path
 from ml.preprocessing_data.check_subject import check_sub
 from ml.request_processing.request_reduction import request_processing
@@ -42,3 +39,4 @@ def get_answer(subject, request):
             'page_end': sub['page_end']
         })
     return answer
+
