@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from starlette.middleware.cors import CORSMiddleware
 
-from routers.articles_router import router as router_article
+from routers.answer_router import router as router_answer
 from routers.pages_router import router as router_page
 from routers.database_router import router as router_db
 
@@ -12,7 +12,7 @@ app = FastAPI(
 
 app.mount("/static", StaticFiles(directory="static", html=True), name="static")
 
-app.include_router(router_article)
+app.include_router(router_answer)
 app.include_router(router_db)
 app.include_router(router_page)
 

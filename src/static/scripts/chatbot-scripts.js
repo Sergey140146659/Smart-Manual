@@ -82,9 +82,16 @@ window.addEventListener('DOMContentLoaded', () => {
 //  Send Message
 
     const messageFormDOM = document.querySelector('.messanger_form');
-    messageFormDOM.addEventListener('submit', (e) => {
+    messageFormDOM.addEventListener('submit', async (e) => {
         e.preventDefault();
         const messageInput = messageFormDOM.querySelector('.request_input');
         const message = messageInput.value;
+
+        const formData = new FormData();
+        formData.append('subject_name', subjectTargetName);
+        formData.append('request', message);
+        const url = `../answer/get_answer?subject_name=${subjectTargetName}&request=&{request}`
+        const response = await getRequest(url);
+        console.log(response);
     });
 });
