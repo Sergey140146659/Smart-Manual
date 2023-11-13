@@ -47,7 +47,7 @@ def create_subject(obj):
 
         sub_info = {
             "sections": [],
-            "pages_start": [],
+            "page_start": [],
             "page_end": [],
             "text_of_sections": [],
             "lemma_text_of_sections": [],
@@ -66,7 +66,7 @@ def create_subject(obj):
             subject_info['sections'].append(theme)
             subject_info["page_start"].append(page_start)
             subject_info["page_end"].append(page_end)
-            text = get_text(obj['path'], page_start,page_end) + ' ' + theme
+            text = get_text(obj['path'], page_start, page_end) + ' ' + theme
             subject_info['text_of_sections'].append(text)
             lemma = lemma_text(text)
             subject_info['lemma_text_of_sections'].append(lemma)
@@ -76,3 +76,13 @@ def create_subject(obj):
             subject_info['lemma_questions'].append([])
         with open(get_path(json_name), "w") as file:
             json.dump(subject_info, file)
+
+# obj = {
+#     "name": "Матан",
+#     "themes": [
+#         {"theme_name": "test", "page_start": 1, "page_end": 1}
+#     ],
+#     "path": "ряды.pdf"
+# }
+#
+# create_subject(obj)
