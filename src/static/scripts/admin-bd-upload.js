@@ -2,17 +2,18 @@ window.addEventListener('DOMContentLoaded', () => {
 
 //  Post Request
 
-    const postRequest = async (url, data = null) => {
-        const res = await fetch(url, {
-            method: "POST",
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: data
-        });
-
-        return await res.json();
-    };
+    async function postRequest(url, formData) {
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
 
 //  Get Request
@@ -86,7 +87,26 @@ window.addEventListener('DOMContentLoaded', () => {
     const subjectFormDOM = document.querySelector('.subject-form');
     subjectFormDOM.addEventListener('submit', async (e) => {
         e.preventDefault();
+        const curThemesNameArr = Array.from(subjectFormDOM.querySelectorAll('.theme-name__input')).map(input => input.value);
+        const curThemesStartPageArr = Array.from(subjectFormDOM.querySelectorAll('.page-num__input#start-page-num')).map(input => input.value);
+        const curThemesEndPageArr = Array.from(subjectFormDOM.querySelectorAll('.page-num__input#end-page-num')).map(input => input.value);
+        let themesArr = [];
+        for (let i = 0; i < curThemesNameArr.length; i++) {
+            themesArr.push({'theme_name': curThemesNameArr[i],
+                            'page_start': curThemesStartPageArr[i],
+                            'page_end': curThemesEndPageArr[i]});
+        }
+        const themesJSON = JSON.stringify(themesArr);
+        const fileInput = document.querySelector('.upload-file-form__input');
+        const file = fileInput.files[0];
 
+        const formData = new FormData();
+        formData.append("subject_file", file);
+        formData.append("subject_name", subjectTargetName);
+        formData.append("themes", themesJSON);
+
+        const response = await postRequest('../db/subject_db_upload', formData);
+        console.log(response);
     });
 
 
@@ -121,7 +141,7 @@ window.addEventListener('DOMContentLoaded', () => {
         themeInputsGroup.classList.add('theme-inputs-group');
         themeInputsGroup.innerHTML = `
             <label class="d-none" for="theme">Название темы</label>
-            <input class="subject-form__input" type="text" id="theme" name="theme" placeholder="Название темы" autocomplete="off">
+            <input class="subject-form__input theme-name__input" type="text" id="theme" name="theme" placeholder="Название темы" autocomplete="off">
             <div class="number-inputs">
                 <label class="d-none" for="start-page-num">Первая страница</label>
                 <input class="subject-form__input page-num__input" type="number" id="start-page-num" name="start-page-num" placeholder="12" autocomplete="off">
