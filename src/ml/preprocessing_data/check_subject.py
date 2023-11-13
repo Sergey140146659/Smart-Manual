@@ -12,7 +12,7 @@ def check_sub(sub):
         for i in range(len(data['orig_name'])):
             if data['orig_name'][i] == sub:
                 return i
-        return False
+        return None
 
 
 def create_sub_name():
