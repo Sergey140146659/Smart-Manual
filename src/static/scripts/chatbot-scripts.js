@@ -115,7 +115,22 @@ window.addEventListener('DOMContentLoaded', () => {
         messageBlockDOM.append(messageDOM);
 
         const message = await promise;
-        messageDOM.innerHTML = message;
-        console.log()
+        console.log(message)
+        if (message.status == 'OK') {
+            messageDOM.innerHTML = `
+                <p>${message.text}</p>
+            `
+            const themeList = document.createElement('ul');
+
+            for (theme of message.data) {
+                themeList.innerHTML += `
+                    <li>
+                        <a class="pdf-link" href="../ml/preprocessing_data/${theme.pdf_name}#page=${theme.page_start}" target="_blank">${theme.theme_name}</a>
+                        <span class="pdf-pages">стр.${theme.page_start}-${theme.page_end}</span>
+                    </li>
+                `;
+            }
+            messageDOM.append(themeList);
+        }
     }
 });
