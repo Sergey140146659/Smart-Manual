@@ -13,8 +13,7 @@ async def get_answer(subject_name: str,
                      request: str,
                      response: Response):
     try:
-        # return get_answer_func(subject_name, request)
-        return "Ебучая гора текста"
+        return get_answer_func(subject_name, request)
     except Exception as e:
         response.status_code = 500
         return {"status": "error", "message": str(e)}
