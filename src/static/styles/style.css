@@ -92,9 +92,9 @@ body {
     background-color: #fff;
     border-radius: 16px;
     overflow: hidden;
-    -webkit-box-shadow: 0px 11px 100px 60px rgba(34, 60, 80, 0.4);
-    -moz-box-shadow: 0px 11px 100px 60px rgba(34, 60, 80, 0.4);
-    box-shadow: 0px 11px 100px 60px rgba(34, 60, 80, 0.4);
+    -webkit-box-shadow: 0px 11px 100px 30px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 0px 11px 100px 30px rgba(34, 60, 80, 0.2);
+    box-shadow: 0px 11px 100px 30px rgba(34, 60, 80, 0.2);
 }
 
 .messanger__navbar {
@@ -1179,5 +1179,5 @@ body {
 .chatbot_section {
     height: 100vh;
     background: rgb(149,164,252);
-    background: linear-gradient(159deg, rgba(149,164,252,1) 0%, rgba(177,227,255,1) 45%, rgba(186,237,189,1) 100%);
+    background: linear-gradient(159deg, rgba(149,164,252,0.5) 0%, rgba(177,227,255,0.5) 45%, rgba(186,237,189,0.5) 100%);
 }
