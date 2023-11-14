@@ -35,3 +35,12 @@ def searching_tf_idf_faq(path, request, top_n=5):
         }
         subject_to_request.append(subject_i)
     return subject_to_request
+
+
+
+# with open(get_path('subjects.json'), 'r', encoding='utf-8') as f:
+#     subject = json.load(f)
+# subject["orig_name"][2] = "Структуры и алгоритмы обработки данных"
+#
+# with open(get_path('subjects.json'), 'w', encoding='utf-8') as f:
+#     json.dump(subject, f)
