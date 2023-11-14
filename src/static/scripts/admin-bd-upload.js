@@ -84,6 +84,12 @@ window.addEventListener('DOMContentLoaded', () => {
         clearSubjectsActiveButton();
         subjectButtonDOM.classList.add('active');
         subjectTargetName = subjectButtonDOM.textContent;
+        uploadAvailable();
+    }
+
+    function uploadAvailable () {
+        const uploadButton = document.querySelector('.subject__send-theme-button');
+        uploadButton.removeAttribute("disabled");
     }
 
     function clearSubjectsActiveButton () {

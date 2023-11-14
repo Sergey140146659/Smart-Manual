@@ -140,7 +140,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 themeList.innerHTML += `
                     <li>
                         <a class="pdf-link" href="../ml/preprocessing_data/${theme.pdf_name}#page=${theme.page_start}" target="_blank">${theme.theme_name}</a>
-                        <span class="pdf-pages">стр.${theme.page_start}-${theme.page_end}</span>
+                        <span class="pdf-pages">стр.${theme.page_start-theme.page_end ? `${theme.page_start}-${theme.page_end}` : theme.page_start}</span>
                     </li>
                 `;
             }
