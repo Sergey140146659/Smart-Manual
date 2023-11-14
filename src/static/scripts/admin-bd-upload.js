@@ -2,17 +2,18 @@ window.addEventListener('DOMContentLoaded', () => {
 
 //  Post Request
 
-    const postRequest = async (url, data = null) => {
-        const res = await fetch(url, {
-            method: "POST",
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: data
-        });
-
-        return await res.json();
-    };
+    async function postRequest(url, formData) {
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
 
 //  Get Request
@@ -25,49 +26,133 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
 
-//  Get Cookie
+    let subjectTargetName = '';
 
-    function getCookie() {
-        return document.cookie.split('; ').reduce((acc, item) => {
-            const [name, value] = item.split('=')
-            acc[name] = value
-            return acc
-        }, {})
+
+// Subject Add Form
+
+    const subjectAddFormDOM = document.querySelector(".add-subject-form");
+    subjectAddFormDOM.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const subjectNameInput = document.querySelector('.subject-form__input');
+        const newSubjectName = subjectNameInput.value;
+
+        const subjectItemDOM = createSubjectDOM(newSubjectName);
+        chooseSubject(subjectItemDOM.querySelector('button'));
+        subjectNameInput.value = '';
+    });
+
+    function createSubjectDOM (subjectName) {
+        const subjectsListDOM = document.querySelector('.subject-list');
+
+        const newSubject = document.createElement('li');
+        newSubject.classList.add('subject-list__item');
+        newSubject.innerHTML = `
+            <button type="button" class="subject-list__item__button">${subjectName}</button>
+        `;
+        const newSubjectButton = newSubject.querySelector('.subject-list__item__button');
+        newSubjectButton.addEventListener('click', () => chooseSubject(newSubjectButton));
+        subjectsListDOM.append(newSubject);
+        return newSubject;
     }
 
 
-//  Send Upload File Form
+//  Get Subject List
 
-    const uploadForm = document.querySelector('.db-upload__form');
-    const ansMessage = uploadForm.querySelector('.form__ans-message');
-    const fileInput = uploadForm.querySelector('.form__db-file-input');
+    async function getSubjectList () {
+        const subjectsList = await getRequest('../db/subject_list');
+        clearSubjectListDOM();
+        buildSubjectListDOM(subjectsList);
+    }
+    getSubjectList();
 
-    uploadForm.addEventListener('submit', async (event) => {
-        event.preventDefault();
+    function buildSubjectListDOM (subjectList) {
+        for (subjectName of subjectList) {
+            createSubjectDOM(subjectName);
+        }
+    }
 
-        const formData = new FormData(uploadForm);
+    function clearSubjectListDOM () {
+        const subjectListDOM = document.querySelector('.subject-list');
+        subjectListDOM.innerHTML = '';
+    }
 
-        ansMessage.innerHTML = `
-            <div class="loader-container form__loader-container">
-                <span class="loader"></span>
-            </div>
-        `;
 
-        const response = await fetch('/db/upload_db', {
-            method: 'POST',
-            body: formData
-        })
-        .then(data => {
-            if (data.ok) {
-                ansMessage.innerHTML = `
-                    <span class="success_message">Успешно</span>
-                `;
-            } else {
-                ansMessage.innerHTML = `
-                    <span class="error_message">Ошибка</span>
-                `;
-            }
-            fileInput.value = null;
-        });
+//  Choose Subject
+
+    function chooseSubject (subjectButtonDOM) {
+        clearSubjectsActiveButton();
+        subjectButtonDOM.classList.add('active');
+        subjectTargetName = subjectButtonDOM.textContent;
+        uploadAvailable();
+    }
+
+    function uploadAvailable () {
+        const uploadButton = document.querySelector('.subject__send-theme-button');
+        uploadButton.removeAttribute("disabled");
+    }
+
+    function clearSubjectsActiveButton () {
+        const activeButton = document.querySelector('.subject-list__item__button.active');
+        if (activeButton) {
+            activeButton.classList.remove('active');
+        }
+    }
+
+
+//  Send Subject Form
+
+    const subjectFormDOM = document.querySelector('.subject-form');
+    subjectFormDOM.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const curThemesNameArr = Array.from(subjectFormDOM.querySelectorAll('.theme-name__input')).map(input => input.value);
+        const curThemesStartPageArr = Array.from(subjectFormDOM.querySelectorAll('.page-num__input#start-page-num')).map(input => input.value);
+        const curThemesEndPageArr = Array.from(subjectFormDOM.querySelectorAll('.page-num__input#end-page-num')).map(input => input.value);
+        let themesArr = [];
+        for (let i = 0; i < curThemesNameArr.length; i++) {
+            themesArr.push({'theme_name': curThemesNameArr[i],
+                            'page_start': curThemesStartPageArr[i],
+                            'page_end': curThemesEndPageArr[i]});
+        }
+        const themesJSON = JSON.stringify(themesArr);
+        const fileInput = document.querySelector('.upload-file-form__input');
+        const file = fileInput.files[0];
+
+        const formData = new FormData();
+        formData.append("subject_file", file);
+        formData.append("subject_name", subjectTargetName);
+        formData.append("themes", themesJSON);
+
+        const response = await postRequest('../db/subject_db_upload', formData);
     });
+
+
+//  Add Theme DOM
+
+    const addThemeButton = document.querySelector('.subject__add-theme-button');
+    addThemeButton.addEventListener('click', () => {
+        const subjectFormDOM = document.querySelector('.subject-form');
+        const buttonsGroup = document.querySelector('.subject__buttons-group');
+        const themeInputsGroup = document.createElement('div');
+        themeInputsGroup.classList.add('theme-inputs-group');
+        themeInputsGroup.innerHTML = `
+            <label class="d-none" for="theme">Название темы</label>
+            <input class="subject-form__input theme-name__input" type="text" id="theme" name="theme" placeholder="Название темы" autocomplete="off">
+            <div class="number-inputs">
+                <label class="d-none" for="start-page-num">Первая страница</label>
+                <input class="subject-form__input page-num__input" type="number" id="start-page-num" name="start-page-num" placeholder="12" autocomplete="off">
+                <span class="page-num__dash">—</span>
+                <label class="d-none" for="end-page-num">Последняя страница</label>
+                <input class="subject-form__input page-num__input" type="number" id="end-page-num" name="end-page-num" placeholder="16" autocomplete="off">
+            </div>
+            <button type="button" class="theme__delete-button">✕</button>
+        `;
+        const deleteButtonDOM = themeInputsGroup.querySelector('.theme__delete-button');
+        deleteButtonDOM.addEventListener('click', () => {
+             themeInputsGroup.remove();
+        });
+        subjectFormDOM.insertBefore(themeInputsGroup, buttonsGroup);
+    });
+
+
 });

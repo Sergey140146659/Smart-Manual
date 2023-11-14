@@ -15,46 +15,6 @@ window.addEventListener('DOMContentLoaded', () => {
     };
 
 
-//  Logout
-
-    const logoutButton = document.getElementById('logout_button');
-
-    logoutButton.addEventListener('click', (event) => {
-        event.preventDefault();
-
-        postRequest('/auth/logout')
-        .then(data => {
-            console.log('success');
-            window.location.href = '/pages/login';
-        }).catch(() => {
-            console.log('error');
-            window.location.href = '/pages/login';
-        }).finally(() => {
-            form.reset();
-        });
-    });
-
-
-//  Dropdown
-
-    let dropdownList = document.querySelectorAll('.dropdown');
-
-    dropdownList.forEach(dropdown => {
-        const dropdownContent = dropdown.querySelector('.dropdown__content');
-
-        dropdown.addEventListener("mouseenter", () => {
-            dropdownContent.classList.remove('d-none');
-        });
-        dropdownContent.addEventListener("mouseenter", () => {
-            dropdownContent.classList.remove('d-none');
-        });
-
-        dropdown.addEventListener("mouseleave", () => {
-            dropdownContent.classList.add('d-none');
-        });
-    });
-
-
 //  Add Navbar Active Item
 
     const currentUrl = window.location.href;
