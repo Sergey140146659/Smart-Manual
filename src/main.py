@@ -7,7 +7,7 @@ from routers.pages_router import router as router_page
 from routers.database_router import router as router_db
 
 app = FastAPI(
-    title="Smart Search"
+    title="Smart Manual"
 )
 
 app.mount("/static", StaticFiles(directory="static", html=True), name="static")
