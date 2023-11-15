@@ -42,20 +42,6 @@ window.addEventListener('DOMContentLoaded', () => {
         subjectNameInput.value = '';
     });
 
-    function createSubjectDOM (subjectName) {
-        const subjectsListDOM = document.querySelector('.subject-list');
-
-        const newSubject = document.createElement('li');
-        newSubject.classList.add('subject-list__item');
-        newSubject.innerHTML = `
-            <button type="button" class="subject-list__item__button">${subjectName}</button>
-        `;
-        const newSubjectButton = newSubject.querySelector('.subject-list__item__button');
-        newSubjectButton.addEventListener('click', () => chooseSubject(newSubjectButton));
-        subjectsListDOM.append(newSubject);
-        return newSubject;
-    }
-
 
 //  Get Subject List
 
@@ -75,6 +61,20 @@ window.addEventListener('DOMContentLoaded', () => {
     function clearSubjectListDOM () {
         const subjectListDOM = document.querySelector('.subject-list');
         subjectListDOM.innerHTML = '';
+    }
+
+    function createSubjectDOM (subjectName) {
+        const subjectsListDOM = document.querySelector('.subject-list');
+
+        const newSubject = document.createElement('li');
+        newSubject.classList.add('subject-list__item');
+        newSubject.innerHTML = `
+            <button type="button" class="subject-list__item__button">${subjectName}</button>
+        `;
+        const newSubjectButton = newSubject.querySelector('.subject-list__item__button');
+        newSubjectButton.addEventListener('click', () => chooseSubject(newSubjectButton));
+        subjectsListDOM.append(newSubject);
+        return newSubject;
     }
 
 

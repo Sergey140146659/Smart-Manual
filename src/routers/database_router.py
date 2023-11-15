@@ -6,6 +6,7 @@ from fastapi import File, UploadFile, APIRouter, Form, Response
 from ml.db_creating.create_subject import create_subject
 from ml.db_creating.subject_list import get_subject_list
 from ml.preprocessing_data.Articles_path import get_path
+from ml.db_creating.view_subject import marked_list
 
 router = APIRouter(
     prefix="/db",
@@ -38,6 +39,15 @@ async def subject_db_upload(response: Response,
 async def subject_list(response: Response):
     try:
         return get_subject_list()
+    except Exception as e:
+        response.status_code = 500
+        return {"status": "error", "message": str(e)}
+
+
+@router.get("/wide_subject_list")
+async def wide_subject_list(response: Response):
+    try:
+        return marked_list()
     except Exception as e:
         response.status_code = 500
         return {"status": "error", "message": str(e)}
