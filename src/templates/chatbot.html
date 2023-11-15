@@ -9,79 +9,48 @@
     <link rel="shortcut icon" href="../static/images/favicon.ico" type="image/x-icon">
     <script src="../static/scripts/chatbot-scripts.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Smart Search</title>
+    <title>Smart Manual</title>
 </head>
-<body class="chatbot_body">
-    <section class="auth_section d-none">
-        <div class="chatbot_auth_modal_window">
-            <span class="chatbot_auth_modal_window_title">Авторизация</span>
-            <form class="chatbot_auth_modal_window_form" method="POST">
-                <label class="d-none" for="chatbot_auth_token">Токен</label>
-                <input class="chatbot_auth_modal_window_input"
-                       type="text"
-                       name="chatbot_auth_token"
-                       id="chatbot_auth_token"
-                       placeholder="Токен">
-                <button class="chatbot_auth_modal_window_submit" type="submit">Войти</button>
-            </form>
-        </div>
-    </section>
-    <header>
-        <nav class="container flex my-3">
-            <span class="header_title">Smart Search</span>
-        </nav>
-    </header>
+<body>
     <section class="chatbot_section">
-        <div class="container flex chatbot-container">
-            <div class="chats_list_block">
-                <div class="chats_list_header">
-                    <span class="chats_list_title">Чаты</span>
-                </div>
-                <ul class="chats_list">
-                    <li class="chats_list_item">
-                        <button class="chats_list_item_button active" type="button">Чат 1</button>
-                    </li>
-                </ul>
-                <div class="add_chat_block">
-                    <button class="add_chat_button" type="button">Добавить чат</button>
-                </div>
-            </div>
+        <div class="container chatbot-container">
             <div class="messanger">
-                <div class="prev_messages_block"></div>
-                <form class="messanger_form" action="#" method="POST" id="request-form">
-                    <label for="request" class="hidden">Введите запрос</label>
-                    <textarea class="request_input"
-                              id="request"
-                              name="request"
-                              placeholder="Спросите что-нибудь"
-                              required></textarea>
-                    <div class="messanger_send_block">
-                        <button class="mod_tag_button active" type="button" data-type="faq">
-                            <div class="mod_tag_button_icon">
-                                <img class="mod_tag_button_icon_image" src="../static/images/faq-icon.svg"
-                                     alt="Кнопка поиска запроса в разделе faq">
-                            </div>
-                            <span class="mod_tag_button_text">FAQ</span>
-                        </button>
-                        <button class="mod_tag_button active" type="button" data-type="article">
-                            <div class="mod_tag_button_icon">
-                                <img class="mod_tag_button_icon_image" src="../static/images/faq-icon.svg"
-                                     alt="Кнопка поиска запроса в разделе faq">
-                            </div>
-                            <span class="mod_tag_button_text">Article</span>
-                        </button>
-                        <button class="mod_tag_button active" type="button" data-type="law">
-                            <div class="mod_tag_button_icon">
-                                <img class="mod_tag_button_icon_image" src="../static/images/faq-icon.svg"
-                                     alt="Кнопка поиска запроса в разделе faq">
-                            </div>
-                            <span class="mod_tag_button_text">Law</span>
-                        </button>
-                        <button class="request_submit" type="submit">
-                            <img class="send_button_icon" src="../static/images/send-icon.svg" alt="Кнопка отправки">
-                        </button>
+                 <nav class="messanger__navbar">
+                    <span class="header_title">Smart Manual</span>
+                </nav>
+                <div class="messanger__content">
+                    <div class="messanger__subjects">
+                        <span class="subjects__title">Предметы</span>
+                        <ul class="messanger__subject-list subject-list"></ul>
                     </div>
-                </form>
+                    <div class="messanger__chat">
+                        <div class="prev_messages_block">
+                            <div class="instruction">
+                                <h1 class="instruction__title">Инструкция</h1>
+                                <ol class="instruction__list">
+                                    <li>Выбрать интересующий предмет.</li>
+                                    <li>Написать запрос по одной из тем.</li>
+                                    <li>Перейти по ссылке в методичку.</li>
+                                </ol>
+                            </div>
+                        </div>
+                        <form class="messanger_form" action="#" method="POST" id="request-form">
+                            <label for="request" class="hidden">Введите запрос</label>
+                            <textarea class="request_input"
+                                      id="request"
+                                      name="request"
+                                      placeholder="Выберите предмет"
+                                      disabled
+                                      required></textarea>
+                            <div class="messanger_send_block">
+
+                                <button class="request_submit" type="submit">
+                                    <img class="send_button_icon" src="../static/images/send-icon.svg" alt="Кнопка отправки">
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

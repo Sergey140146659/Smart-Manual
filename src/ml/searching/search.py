@@ -28,7 +28,6 @@ def searching_tf_idf_faq(path, request, top_n=5):
             "sections": subject["sections"][index],
             "page_start": subject["page_start"][index],
             "page_end": subject["page_end"][index],
-            "pages_number_of_sections": subject["pages_number_of_sections"][index],
             "text_of_sections": subject["text_of_sections"][index],
             "lemma_text_of_sections": subject["lemma_text_of_sections"][index],
             "combined_text_of_sections": subject["combined_text_of_sections"][index],
@@ -36,3 +35,12 @@ def searching_tf_idf_faq(path, request, top_n=5):
         }
         subject_to_request.append(subject_i)
     return subject_to_request
+
+
+
+# with open(get_path('subjects.json'), 'r', encoding='utf-8') as f:
+#     subject = json.load(f)
+# subject["orig_name"][2] = "Структуры и алгоритмы обработки данных"
+#
+# with open(get_path('subjects.json'), 'w', encoding='utf-8') as f:
+#     json.dump(subject, f)

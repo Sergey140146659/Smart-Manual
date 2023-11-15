@@ -26,17 +26,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
 
-//  Get Cookie
-
-    function getCookie() {
-        return document.cookie.split('; ').reduce((acc, item) => {
-            const [name, value] = item.split('=')
-            acc[name] = value
-            return acc
-        }, {})
-    }
-
-
     let subjectTargetName = '';
 
 
@@ -54,15 +43,38 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
     function createSubjectDOM (subjectName) {
-        const subjectsListDOM = document.querySelector('.loaded-db__list');
+        const subjectsListDOM = document.querySelector('.subject-list');
 
         const newSubject = document.createElement('li');
-        newSubject.classList.add('loaded-db__item');
+        newSubject.classList.add('subject-list__item');
         newSubject.innerHTML = `
-            <button type="button" class="loaded-db__item__button">${subjectName}</button>
+            <button type="button" class="subject-list__item__button">${subjectName}</button>
         `;
+        const newSubjectButton = newSubject.querySelector('.subject-list__item__button');
+        newSubjectButton.addEventListener('click', () => chooseSubject(newSubjectButton));
         subjectsListDOM.append(newSubject);
         return newSubject;
+    }
+
+
+//  Get Subject List
+
+    async function getSubjectList () {
+        const subjectsList = await getRequest('../db/subject_list');
+        clearSubjectListDOM();
+        buildSubjectListDOM(subjectsList);
+    }
+    getSubjectList();
+
+    function buildSubjectListDOM (subjectList) {
+        for (subjectName of subjectList) {
+            createSubjectDOM(subjectName);
+        }
+    }
+
+    function clearSubjectListDOM () {
+        const subjectListDOM = document.querySelector('.subject-list');
+        subjectListDOM.innerHTML = '';
     }
 
 
@@ -72,10 +84,16 @@ window.addEventListener('DOMContentLoaded', () => {
         clearSubjectsActiveButton();
         subjectButtonDOM.classList.add('active');
         subjectTargetName = subjectButtonDOM.textContent;
+        uploadAvailable();
+    }
+
+    function uploadAvailable () {
+        const uploadButton = document.querySelector('.subject__send-theme-button');
+        uploadButton.removeAttribute("disabled");
     }
 
     function clearSubjectsActiveButton () {
-        const activeButton = document.querySelector('.loaded-db__item__button.active');
+        const activeButton = document.querySelector('.subject-list__item__button.active');
         if (activeButton) {
             activeButton.classList.remove('active');
         }
@@ -106,29 +124,7 @@ window.addEventListener('DOMContentLoaded', () => {
         formData.append("themes", themesJSON);
 
         const response = await postRequest('../db/subject_db_upload', formData);
-        console.log(response);
     });
-
-
-//  Get Subject List
-
-    async function getSubjectList () {
-        const subjectsList = await getRequest('../db/subject_list');
-        clearSubjectListDOM();
-        buildSubjectListDOM(subjectsList);
-    }
-    getSubjectList();
-
-    function buildSubjectListDOM (subjectList) {
-        for (subjectName of subjectList) {
-            createSubjectDOM(subjectName);
-        }
-    }
-
-    function clearSubjectListDOM () {
-        const subjectListDOM = document.querySelector('.loaded-db__list');
-        subjectListDOM.innerHTML = '';
-    }
 
 
 //  Add Theme DOM

@@ -1,6 +1,4 @@
 import json
-
-from classification.classifier_model import classifier
 from random import randint
 
 from ml.preprocessing_data.Articles_path import get_path
@@ -41,4 +39,7 @@ def get_answer(subject, request):
             'page_start': sub['page_start'],
             'page_end': sub['page_end']
         })
-    return answer
+    return {"status": "OK",
+            "text": understand[randint(0, len(understand))],
+            "data": answer[::-1]
+            }

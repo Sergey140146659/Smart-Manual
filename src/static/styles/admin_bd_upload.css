@@ -14,22 +14,6 @@ input::-webkit-inner-spin-button {
     padding: 20px 0 40px 0;
 }
 
-.title {
-    font-family: 'Rubik', sans-serif;
-    font-size: 1.8em;
-    font-weight: 500;
-    color: rgba(0, 0, 0, 0.85);
-    margin-bottom: 30px;
-}
-
-.subtitle {
-    font-family: 'Rubik', sans-serif;
-    font-size: 1.4em;
-    font-weight: 500;
-    color: rgba(0, 0, 0, 0.8);
-    margin-bottom: 15px;
-}
-
 .db-upload__inner {
     height: 100%;
     display: flex;
@@ -54,22 +38,22 @@ input::-webkit-inner-spin-button {
     margin: 20px 0;
 }
 
-.loaded-db__list {
+.subject-list {
     flex-grow: 1;
 }
 
-.loaded-db__item {
+.subject-list__item {
     margin-bottom: 2px;
 }
 
-.loaded-db__item__button {
+.subject-list__item__button {
     text-align: left;
     width: 100%;
     padding: 8px 20px;
     border-radius: 12px;
 }
 
-.loaded-db__item__button.active {
+.subject-list__item__button.active {
     background-color: rgba(28, 28, 28, 0.05);
 }
 
@@ -174,6 +158,10 @@ input::-webkit-inner-spin-button {
     border-radius: 12px;
     padding: 8px 20px;
     transition: 0.3s;
+}
+
+.subject__send-theme-button:disabled:hover {
+    background-color: #BAEDBD !important;
 }
 
 .subject__send-theme-button:hover {

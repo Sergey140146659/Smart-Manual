@@ -41,13 +41,13 @@
 }
 
 .navbar__item {
-    height: 30px;
+    height: 34px;
     display: flex;
     align-items: center;
     position: relative;
     background-color: #fff;
-    border-radius: 15px;
-    margin-right: 3px;
+    border-radius: 9px;
+    margin-right: 10px;
     transition: .3s;
 }
 .navbar__item:hover {
@@ -119,4 +119,20 @@
 .dropdown__item.active {
     background-color: #f2f2f2;
     color: #666;
+}
+
+.title {
+    font-family: 'Rubik', sans-serif;
+    font-size: 1.8em;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.85);
+    margin-bottom: 30px;
+}
+
+.subtitle {
+    font-family: 'Rubik', sans-serif;
+    font-size: 1.4em;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.8);
+    margin-bottom: 15px;
 }
