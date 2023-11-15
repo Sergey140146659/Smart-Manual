@@ -15,7 +15,13 @@ def check_sub(sub):
         return False
 
 
+
 def create_sub_name():
     with open(get_path('subjects.json'), 'r') as file:
         data = json.load(file)
+<<<<<<< Updated upstream
     return 'subject' + str(len(data['orig_name']) + 1) + '.json'
+=======
+    return 'subject' + str(len(data['orig_name']) + 1) + '.json'
+
+>>>>>>> Stashed changes
