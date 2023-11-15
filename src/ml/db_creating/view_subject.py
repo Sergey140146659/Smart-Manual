@@ -41,4 +41,4 @@ def marked_list():
         orig_json = data['orig_name'][i]
         marked_sub = marked_subject(sub_json, orig_json)
         obj['subjects'].append(marked_sub)
-    return obj
+    return obj['subjects']
