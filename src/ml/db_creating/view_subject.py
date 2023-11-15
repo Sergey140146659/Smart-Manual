@@ -26,3 +26,19 @@ def marked_subject(sub_json, sub_orig):
         }
         obj['themes'].append(cur_section)
     return obj
+
+
+def marked_list():
+    obj = {
+        'subjects': [
+
+        ]
+    }
+    with open(get_path('subjects.json'), 'r') as file:
+        data = json.load(file)
+    for i in range(len(data['json_name'])):
+        sub_json = data['json_name'][i]
+        orig_json = data['orig_name'][i]
+        marked_sub = marked_subject(sub_json, orig_json)
+        obj['subjects'].append(marked_sub)
+    return obj
