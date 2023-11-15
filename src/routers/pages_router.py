@@ -15,9 +15,9 @@ def get_chatbot_page(request: Request):
     return templates.TemplateResponse("chatbot.html", {"request": request})
 
 
-@router.get("/admin_rates")
+@router.get("/admin_notes")
 def get_admin_systems_page(request: Request):
-    return templates.TemplateResponse("admin_rates.html", {"request": request})
+    return templates.TemplateResponse("admin_notes.html", {"request": request})
 
 
 @router.get("/admin_db_upload")
