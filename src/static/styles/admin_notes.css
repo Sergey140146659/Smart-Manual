@@ -11,16 +11,18 @@
 
 .loaded-db-wide {
     width: 400px;
-    padding: 0 10px;
+    padding: 0 10px 0 10px;
     border-right: 1px solid rgba(0,0,0,0.1);
 }
 
 .notes-content {
     display: flex;
+    gap: 50px;
 }
 
 .notes-writing {
     flex-grow: 1;
+    min-width: 400px;
 }
 
 .wide-subject-list__subject-file {
@@ -29,13 +31,17 @@
     color: rgba(0,0,0,0.4);
 }
 
+.wide-subject-list__subject-file:hover {
+    text-decoration: underline;
+}
+
 .wide-subject-list__item {
     margin-bottom: 20px;
 }
 
 .wide-subject-list__item > span {
-    font-size: 1.2em;
-    font-weight: 500;
+    font-size: 1.05em;
+    font-weight: 600;
 }
 
 .wide-subject-list__themes-list {
@@ -43,7 +49,7 @@
 }
 
 .wide-subject-list__theme-item {
-    padding-left: 5px;
+    padding-left: 10px;
     border-left: 1px solid rgba(0,0,0,0.1);
 }
 
@@ -62,4 +68,23 @@
 
 .wide-subject-list__theme-item__button:hover {
     background-color: rgba(28, 28, 28, 0.05);
+}
+
+.notes-writing__form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.notes-writing__form__textarea {
+    border-radius: 12px;
+    padding: 8px 15px;
+    border: 1px solid rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 800px;
+    max-height: 100%;
+}
+
+.notes-writing__form__send-button {
+    margin-top: 20px;
 }

@@ -5,7 +5,7 @@
 
 <link rel="stylesheet" href="../static/styles/admin_notes.css">
 <script src="../static/scripts/admin-notes.js"></script>
-<title>Smart Manual - Rates List</title>
+<title>Smart Manual - Admin Notes</title>
 
 {% endblock %}
 
@@ -21,9 +21,11 @@
                 </ul>
             </div>
             <div class="notes-writing">
-                <form class="articles_rates_form">
-                    <div class="articles_rates_list">
-                    </div>
+                <h2 class="subtitle">Заметка</h2>
+                <form class="notes-writing__form">
+                    <label class="d-none" for="notes">Заметки к теме</label>
+                    <textarea class="notes-writing__form__textarea" id="notes" name="notes" rows="16" placeholder="Выберите тему" disabled></textarea>
+                    <button class="send-button notes-writing__form__send-button" type="submit" disabled>Загрузить</button>
                 </form>
             </div>
         </div>

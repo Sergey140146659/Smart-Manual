@@ -136,3 +136,18 @@
     color: rgba(0, 0, 0, 0.8);
     margin-bottom: 15px;
 }
+
+.send-button {
+    background-color: #BAEDBD !important;
+    border-radius: 12px;
+    padding: 8px 20px;
+    transition: 0.3s;
+}
+
+.send-button:hover {
+    background-color: #afd9b2 !important;
+}
+
+.send-button:disabled:hover {
+    background-color: #BAEDBD !important;
+}

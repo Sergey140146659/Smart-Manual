@@ -51,7 +51,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function createWideSubjectDOM (subject) {
-        console.log(subject);
         const wideSubjectsListDOM = document.querySelector('.wide-subject-list');
 
         const newSubject = document.createElement('li');
@@ -67,7 +66,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
         for (file of filesList) {
             newSubject.innerHTML += `
-                <p class="wide-subject-list__subject-file">${file}</p>
+                <p><a href="../ml/preprocessing_data/${file}" class="wide-subject-list__subject-file" target="_blank">${file}</a></p>
             `;
             const themesListDOM = document.createElement('ul');
             themesListDOM.classList.add('wide-subject-list__themes-list');
@@ -75,7 +74,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 if (theme.file_name == file) {
                     themesListDOM.innerHTML += `
                         <li class="wide-subject-list__theme-item">
-                            <button type="button" class="wide-subject-list__theme-item__button">${theme.name}</button>
+                            <button type="button" class="wide-subject-list__theme-item__button" data-subject="${subject.name}">${theme.name}</button>
                         </li>
                     `;
                 }
@@ -84,7 +83,41 @@ window.addEventListener('DOMContentLoaded', () => {
         }
 
         wideSubjectsListDOM.append(newSubject);
+
+        const themesButtonsListDOM = newSubject.querySelectorAll('.wide-subject-list__theme-item__button');
+        for (themeButtonDOM of themesButtonsListDOM) {
+            const curThemeButtonDOM = themeButtonDOM;
+            themeButtonDOM.addEventListener('click', () => chooseTheme(curThemeButtonDOM));
+        }
+
         return newSubject;
+    }
+
+
+//  Choose Theme
+
+    function chooseTheme (themeButtonDOM) {
+        clearThemeActiveButton();
+        themeButtonDOM.classList.add('active');
+        themeTargetName = themeButtonDOM.textContent;
+        subjectTargetName = themeButtonDOM.dataset.subject;
+        uploadAvailable();
+    }
+
+    function uploadAvailable () {
+        const uploadButton = document.querySelector('.notes-writing__form__send-button');
+        const noteTextarea = document.querySelector('.notes-writing__form__textarea');
+        uploadButton.removeAttribute("disabled");
+        noteTextarea.removeAttribute("disabled");
+        noteTextarea.removeAttribute("placeholder");
+    }
+
+
+    function clearThemeActiveButton () {
+        const activeButton = document.querySelector('.wide-subject-list__theme-item__button.active');
+        if (activeButton) {
+            activeButton.classList.remove('active');
+        }
     }
 
 });
