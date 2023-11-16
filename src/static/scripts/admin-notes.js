@@ -70,11 +70,12 @@ window.addEventListener('DOMContentLoaded', () => {
                 <p class="wide-subject-list__subject-file">${file}</p>
             `;
             const themesListDOM = document.createElement('ul');
+            themesListDOM.classList.add('wide-subject-list__themes-list');
             for (theme of subject.themes) {
                 if (theme.file_name == file) {
                     themesListDOM.innerHTML += `
-                        <li class="">
-                            <button type="button" class="subject-list__item__button">${theme.name}</button>
+                        <li class="wide-subject-list__theme-item">
+                            <button type="button" class="wide-subject-list__theme-item__button">${theme.name}</button>
                         </li>
                     `;
                 }

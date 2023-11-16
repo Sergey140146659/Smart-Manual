@@ -51,10 +51,16 @@ input::-webkit-inner-spin-button {
     width: 100%;
     padding: 8px 20px;
     border-radius: 12px;
+    transition: 0.3s;
+}
+
+.subject-list__item__button:hover {
+    background-color: rgba(28, 28, 28, 0.05);
 }
 
 .subject-list__item__button.active {
     background-color: rgba(28, 28, 28, 0.05);
+    color: rgba(0,0,0,0.4)
 }
 
 .db-content {

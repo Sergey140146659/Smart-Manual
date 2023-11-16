@@ -11,7 +11,7 @@
 
 .loaded-db-wide {
     width: 400px;
-    padding: 10px 20px;
+    padding: 0 10px;
     border-right: 1px solid rgba(0,0,0,0.1);
 }
 
@@ -24,6 +24,7 @@
 }
 
 .wide-subject-list__subject-file {
+    margin-top: 10px;
     font-size: 0.82em;
     color: rgba(0,0,0,0.4);
 }
@@ -34,4 +35,31 @@
 
 .wide-subject-list__item > span {
     font-size: 1.2em;
+    font-weight: 500;
+}
+
+.wide-subject-list__themes-list {
+    margin-left: 5px;
+}
+
+.wide-subject-list__theme-item {
+    padding-left: 5px;
+    border-left: 1px solid rgba(0,0,0,0.1);
+}
+
+.wide-subject-list__theme-item__button {
+    text-align: left;
+    width: 100%;
+    padding: 8px 15px;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+.wide-subject-list__theme-item__button.active {
+    color: rgba(0,0,0,0.4);
+    background-color: rgba(28, 28, 28, 0.05);
+}
+
+.wide-subject-list__theme-item__button:hover {
+    background-color: rgba(28, 28, 28, 0.05);
 }
