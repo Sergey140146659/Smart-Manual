@@ -25,3 +25,19 @@ def write_note(obj):
             with open(get_path(json_name), 'w') as file:
                 json.dump(sub, file)
             break
+
+
+def get_note(obj):
+    name = obj["name"]  # предмет
+    theme_name = obj["theme_name"]  # тема
+    with open(get_path('subjects.json'), 'r') as file:
+        data = json.load(file)
+
+    index = check_sub(name)
+    json_name = data['json_name'][index]
+    with open(get_path(json_name), 'r') as file:
+        sub = json.load(file)
+    for i in range(len(sub["sections"])):
+        if sub["sections"] == theme_name:
+            return sub["questions"][i]
+
