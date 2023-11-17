@@ -140,8 +140,7 @@ window.addEventListener('DOMContentLoaded', () => {
     async function showNote (subjectName, themeName) {
         const formTextarea = document.querySelector('.notes-writing__form__textarea');
         const url = `../db/theme_notes?subject_name=${subjectName}&theme_name=${themeName}`;
-        console.log(url);
         const notes = await getRequest(url);
-        console.log(notes);
+        formTextarea.value = notes;
     }
 });
