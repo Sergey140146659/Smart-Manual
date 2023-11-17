@@ -147,5 +147,12 @@ window.addEventListener('DOMContentLoaded', () => {
             messageDOM.append(themeList);
             messageBlockDOM.scrollTo(0, messageBlockDOM.scrollHeight);
         }
+
+        if (message.status == 'BAD') {
+            messageDOM.innerHTML = `
+                <p>${message.text}</p>
+            `
+            messageBlockDOM.scrollTo(0, messageBlockDOM.scrollHeight);
+        }
     }
 });

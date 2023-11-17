@@ -88,7 +88,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function uploadAvailable () {
-        const uploadButton = document.querySelector('.subject__send-theme-button');
+        const uploadButton = document.querySelector('.send-button');
         uploadButton.removeAttribute("disabled");
     }
 
@@ -124,6 +124,27 @@ window.addEventListener('DOMContentLoaded', () => {
         formData.append("themes", themesJSON);
 
         const response = await postRequest('../db/subject_db_upload', formData);
+
+        const buttonsGroupDOM = document.querySelector('.subject__buttons-group');
+        if (response.status != "ok") {
+            const errorMessage = document.createElement('div');
+            errorMessage.classList.add('error_message');
+            errorMessage.textContent = 'Ошибка';
+            buttonsGroupDOM.append(errorMessage);
+
+            setTimeout(() => {
+                errorMessage.remove();
+            }, 2000);
+        } else {
+            const successMessage = document.createElement('div');
+            successMessage.classList.add('success_message');
+            successMessage.textContent = 'Успех';
+            buttonsGroupDOM.append(successMessage);
+
+            setTimeout(() => {
+                successMessage.remove();
+            }, 2000);
+        }
     });
 
 
