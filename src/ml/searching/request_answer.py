@@ -1,6 +1,7 @@
 import json
 from random import randint
 
+from classification.classifier_model import classifier
 from ml.preprocessing_data.Articles_path import get_path
 from ml.preprocessing_data.check_subject import check_sub
 from ml.request_processing.request_reduction import request_processing
@@ -26,6 +27,11 @@ understand = [
 def get_answer(subject, request):
     process_request = request_processing(request)
     request = request + ' ' + process_request
+    if classifier(request) == 0:
+        return {"status": "BAD",
+                "text": dont_understand[randint(0, len(dont_understand))],
+                "data": []
+                }
     with open(get_path('subjects.json'), 'r') as file:
         data = json.load(file)
     index = check_sub(subject)
