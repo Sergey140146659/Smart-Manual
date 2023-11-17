@@ -29,7 +29,7 @@ def get_answer(subject, request):
     request = request + ' ' + process_request
     if classifier(request) == 0:
         return {"status": "BAD",
-                "text": dont_understand[randint(0, len(dont_understand))],
+                "text": dont_understand[randint(0, len(dont_understand) - 1)],
                 "data": []
                 }
     with open(get_path('subjects.json'), 'r') as file:
@@ -46,6 +46,6 @@ def get_answer(subject, request):
             'page_end': sub['page_end']
         })
     return {"status": "OK",
-            "text": understand[randint(0, len(understand))],
+            "text": understand[randint(0, len(understand) - 1)],
             "data": answer[::-1]
             }
