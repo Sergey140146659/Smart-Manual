@@ -5,10 +5,7 @@ from ml.preprocessing_data.check_subject import check_sub
 from ml.request_processing.lemmatization import lemma_text
 
 
-def write_note(obj):
-    name = obj["name"]  # предмет
-    theme_name = obj["theme_name"]  # тема
-    questions = obj["questions"]  # заметка
+def write_note(name, theme_name, questions):
     with open(get_path('subjects.json'), 'r') as file:
         data = json.load(file)
 
@@ -27,9 +24,7 @@ def write_note(obj):
             break
 
 
-def get_note(obj):
-    name = obj["name"]  # предмет
-    theme_name = obj["theme_name"]  # тема
+def get_note(name, theme_name):
     with open(get_path('subjects.json'), 'r') as file:
         data = json.load(file)
 
@@ -40,4 +35,3 @@ def get_note(obj):
     for i in range(len(sub["sections"])):
         if sub["sections"] == theme_name:
             return sub["questions"][i]
-
