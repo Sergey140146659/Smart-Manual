@@ -51,3 +51,14 @@ async def wide_subject_list(response: Response):
     except Exception as e:
         response.status_code = 500
         return {"status": "error", "message": str(e)}
+
+
+@router.get("/theme_notes")
+async def theme_notes(response: Response,
+                      subject_name: str,
+                      theme_name: str):
+    try:
+        return get_note(subject_name, theme_name)
+    except Exception as e:
+        response.status_code = 500
+        return {"status": "error", "message": str(e)}            
