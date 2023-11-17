@@ -14,7 +14,7 @@ def write_note(name, theme_name, questions):
     with open(get_path(json_name), 'r') as file:
         sub = json.load(file)
     for i in range(len(sub["sections"])):
-        if sub["sections"] == theme_name:
+        if sub["sections"][i] == theme_name:
             sub["questions"][i] = questions
             sub["lemma_questions"][i] = lemma_text(questions)
             sub["combined_text_of_sections"][i] = sub['text_of_sections'][i] + ' ' + sub["lemma_text_of_sections"][i] + \
@@ -33,5 +33,5 @@ def get_note(name, theme_name):
     with open(get_path(json_name), 'r') as file:
         sub = json.load(file)
     for i in range(len(sub["sections"])):
-        if sub["sections"] == theme_name:
+        if sub["sections"][i] == theme_name:
             return sub["questions"][i]
