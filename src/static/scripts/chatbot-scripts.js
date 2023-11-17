@@ -92,6 +92,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const messageInputDOM = document.querySelector('.request_input');
     messageInputDOM.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
             messageFormDOM.dispatchEvent(new Event('submit'));
         }
     });
@@ -99,11 +100,11 @@ window.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         const messageInput = messageFormDOM.querySelector('.request_input');
         const message = messageInput.value;
+        messageInput.value = '';
         createUserMessage(message);
 
         const url = `../answer/get_answer?subject_name=${subjectTargetName}&request=${message}`
         await createBotMessage(getRequest(url));
-        messageInput.value = '';
     });
 
 
