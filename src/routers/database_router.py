@@ -7,6 +7,7 @@ from ml.db_creating.create_subject import create_subject
 from ml.db_creating.subject_list import get_subject_list
 from ml.preprocessing_data.Articles_path import get_path
 from ml.db_creating.view_subject import marked_list
+from ml.db_creating.question_mode import get_note, write_note
 
 router = APIRouter(
     prefix="/db",
@@ -62,3 +63,15 @@ async def theme_notes(response: Response,
     except Exception as e:
         response.status_code = 500
         return {"status": "error", "message": str(e)}            
+
+
+@router.post("/write_theme_notes")
+async def write_theme_notes(response: Response,
+                            subject_name: str,
+                            theme_name: str,
+                            note: str):
+    try:
+        return write_note(subject_name, theme_name, note)
+    except Exception as e:
+        response.status_code = 500
+        return {"status": "error", "message": str(e)}

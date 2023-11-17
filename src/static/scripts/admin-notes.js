@@ -102,6 +102,7 @@ window.addEventListener('DOMContentLoaded', () => {
         themeTargetName = themeButtonDOM.textContent;
         subjectTargetName = themeButtonDOM.dataset.subject;
         uploadAvailable();
+        showNote(subjectTargetName, themeTargetName);
     }
 
     function uploadAvailable () {
@@ -120,4 +121,27 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+
+//  Send note
+    
+    const noteFormDOM = document.querySelector('.notes-writing__form');
+    noteFormDOM.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formTextarea = noteFormDOM.querySelector('.notes-writing__form__textarea');
+        const note = formTextarea.value;
+        const url = `../db/write_theme_notes?subject_name=${subjectTargetName}&theme_name=${themeTargetName}&note=${note}`;
+        response = await postRequest(url);
+        console.log(response);
+    });
+
+
+//  Show note
+
+    async function showNote (subjectName, themeName) {
+        const formTextarea = document.querySelector('.notes-writing__form__textarea');
+        const url = `../db/theme_notes?subject_name=${subjectName}&theme_name=${themeName}`;
+        console.log(url);
+        const notes = await getRequest(url);
+        console.log(notes);
+    }
 });
