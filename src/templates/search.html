@@ -1,0 +1,44 @@
+{% extends "bases/app.html" %}
+
+{% block head %}
+<script src="../static/scripts/search-scripts.js"></script>
+{% endblock %}
+
+
+{% block content %}
+
+<div class="messanger__content">
+    <div class="messanger__subjects">
+        <span class="subjects__title">Предметы</span>
+        <ul class="messanger__subject-list subject-list"></ul>
+    </div>
+    <div class="messanger__chat">
+        <div class="prev_messages_block">
+            <div class="instruction">
+                <h1 class="instruction__title">Инструкция</h1>
+                <ol class="instruction__list">
+                    <li>Выбрать интересующий предмет.</li>
+                    <li>Написать запрос по одной из тем.</li>
+                    <li>Перейти по ссылке в методичку.</li>
+                </ol>
+            </div>
+        </div>
+        <form class="messanger_form" action="#" method="POST" id="request-form">
+            <label for="request" class="hidden">Введите запрос</label>
+            <textarea class="request_input"
+                        id="request"
+                        name="request"
+                        placeholder="Выберите предмет"
+                        disabled
+                        required></textarea>
+            <div class="messanger_send_block">
+
+                <button class="request_submit" type="submit">
+                    <img class="send_button_icon" src="../static/images/send-icon.svg" alt="Кнопка отправки">
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

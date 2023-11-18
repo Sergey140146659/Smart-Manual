@@ -10,9 +10,14 @@ router = APIRouter(
 templates = Jinja2Templates(directory="templates")
 
 
-@router.get("/chatbot")
-def get_chatbot_page(request: Request):
-    return templates.TemplateResponse("chatbot.html", {"request": request})
+@router.get("/search")
+def get_search_page(request: Request):
+    return templates.TemplateResponse("search.html", {"request": request})
+
+
+@router.get("/files")
+def get_files_page(request: Request):
+    return templates.TemplateResponse("files.html", {"request": request})
 
 
 @router.get("/admin_notes")
