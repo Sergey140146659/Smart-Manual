@@ -71,7 +71,8 @@ async def write_theme_notes(response: Response,
                             theme_name: str,
                             note: str):
     try:
-        return write_note(subject_name, theme_name, note)
+        write_note(subject_name, theme_name, note)
+        return {"status": "ok"}
     except Exception as e:
         response.status_code = 500
         return {"status": "error", "message": str(e)}

@@ -132,6 +132,27 @@ window.addEventListener('DOMContentLoaded', () => {
         const url = `../db/write_theme_notes?subject_name=${subjectTargetName}&theme_name=${themeTargetName}&note=${note}`;
         response = await postRequest(url);
         console.log(response);
+        
+        const buttonsGroupDOM = document.querySelector('.buttons-group');
+        if (response.status != "ok") {
+            const errorMessage = document.createElement('div');
+            errorMessage.classList.add('error_message');
+            errorMessage.textContent = 'Ошибка';
+            buttonsGroupDOM.append(errorMessage);
+
+            setTimeout(() => {
+                errorMessage.remove();
+            }, 2000);
+        } else {
+            const successMessage = document.createElement('div');
+            successMessage.classList.add('success_message');
+            successMessage.textContent = 'Успех';
+            buttonsGroupDOM.append(successMessage);
+
+            setTimeout(() => {
+                successMessage.remove();
+            }, 2000);
+        }
     });
 
 

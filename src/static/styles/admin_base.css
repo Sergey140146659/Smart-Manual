@@ -151,3 +151,9 @@
 .send-button:disabled:hover {
     background-color: #BAEDBD !important;
 }
+
+.buttons-group {
+    margin-top: 30px;
+    display: flex;
+    gap: 30px;
+}

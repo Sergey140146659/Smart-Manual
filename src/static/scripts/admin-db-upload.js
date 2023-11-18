@@ -125,7 +125,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
         const response = await postRequest('../db/subject_db_upload', formData);
 
-        const buttonsGroupDOM = document.querySelector('.subject__buttons-group');
+        const buttonsGroupDOM = document.querySelector('.buttons-group');
         if (response.status != "ok") {
             const errorMessage = document.createElement('div');
             errorMessage.classList.add('error_message');

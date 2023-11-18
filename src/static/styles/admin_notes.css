@@ -11,6 +11,7 @@
 
 .loaded-db-wide {
     width: 400px;
+    height: 100%;
     padding: 0 10px 0 10px;
     border-right: 1px solid rgba(0,0,0,0.1);
     overflow-y: scroll;
@@ -77,6 +78,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    max-height: calc(100% - 50px);
 }
 
 .notes-writing__form__textarea {
@@ -85,9 +87,4 @@
     border: 1px solid rgba(0,0,0,0.1);
     width: 100%;
     max-width: 800px;
-    max-height: 100%;
-}
-
-.notes-writing__form__send-button {
-    margin-top: 20px;
 }
