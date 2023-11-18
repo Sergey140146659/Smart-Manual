@@ -153,7 +153,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const addThemeButton = document.querySelector('.subject__add-theme-button');
     addThemeButton.addEventListener('click', () => {
         const subjectFormDOM = document.querySelector('.subject-form');
-        const buttonsGroup = document.querySelector('.subject__buttons-group');
+        const buttonsGroup = document.querySelector('.buttons-group');
         const themeInputsGroup = document.createElement('div');
         themeInputsGroup.classList.add('theme-inputs-group');
         themeInputsGroup.innerHTML = `
