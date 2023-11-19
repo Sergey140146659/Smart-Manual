@@ -2,7 +2,7 @@ import json
 from ml.preprocessing_data.Articles_path import get_path
 from ml.request_processing.gramma_checker import correct
 
-str_to_replace = "!«»\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~\t\n\r\x0b\x0c\x0a\xa0–"
+str_to_replace = "!«»\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~\t\n\r\x0b\x0c\x0a\xa0–0123456789"
 replace_dict = str.maketrans(str_to_replace, ' ' * len(str_to_replace))
 
 
@@ -73,7 +73,18 @@ def remove_non_letters(text):
     return text
 
 
-article_trie = Trie()  # префиксное дерево, в котором содержатся все слова из статей
+article_trie = Trie()  # префиксное дерево, в котором содержатся все слова из конспектов
+
+# загрузка всех слов в бор
+subs = ["subject1.json", "subject2.json", "subject3.json", "subject4.json", "subject5.json"]
+
+for sub in subs:
+    with open(get_path(sub), 'r') as file:
+        data = json.load(file)
+        # combined_text_of_sections
+    for section in data["combined_text_of_sections"]:
+        for word in section.split(' '):
+            article_trie.insert(word)
 
 
 def check_word(word):

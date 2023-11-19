@@ -1,0 +1,46 @@
+.files {
+    max-height: 100%;
+    overflow-y: scroll;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2%;
+    padding: 20px;
+}
+
+.subject-card {
+    width: 32%;
+    padding: 10px 15px;
+    border-radius: 12px;
+    margin-bottom: 2%;
+    background-color:  #F7F9FB;
+}
+
+.subject-card__subject-name {
+    font-size: 1.05em;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.files-list {
+    max-height: 200px;
+    overflow-y: scroll;
+    padding-right: 5px;
+}
+
+.files-item {
+    overflow: hidden;
+}
+
+.files-link {
+    color: rgba(0,0,0,0.46);
+}
+
+.files-link:hover {
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 768px) {
+    .subject-card {
+        width: 100%;
+    }
+}

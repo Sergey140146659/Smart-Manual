@@ -3,18 +3,13 @@ asyncpg
 fastapi[all]
 fastapi-users[sqlalchemy]
 python-dotenv
-sqlalchemy
 pydantic
 pandas
 scikit-learn
 pymorphy3
-beautifulsoup4
 requests
 transformers
-chardet
 numpy
-PyYAML
-Markdown
 pyspellchecker
 passlib
 PyJWT
@@ -22,7 +17,6 @@ starlette
 torch
 evaluate
 Levenshtein
-rank_bm25
 language_tool_python
 pygtrie
 PyPDF2

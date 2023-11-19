@@ -3,8 +3,8 @@
 
 {% block head %}
 
-<link rel="stylesheet" href="../static/styles/admin_bd_upload.css">
-<script src="../static/scripts/admin-bd-upload.js"></script>
+<link rel="stylesheet" href="../static/styles/db_upload.css">
+<script src="../static/scripts/db-upload.js"></script>
 <title>Smart Manual - Admin DataBase Upload</title>
 
 {% endblock %}
@@ -30,7 +30,7 @@
                 <h2 class="subtitle">Файл</h2>
                 <form class="upload-file-form">
                     <label class="d-none" for="subject_file">Загрузить файл</label>
-                    <input class="upload-file-form__input" type="file" name="subject_file" id="subject_file">
+                    <input class="upload-file-form__input" type="file" name="subject_file" id="subject_file" required>
                 </form>
                 <h2 class="subtitle">Темы</h2>
                 <form class="subject-form">
@@ -46,9 +46,9 @@
                         </div>
                         <button type="button" class="theme__delete-button">✕</button>
                     </div>
-                    <div class="subject__buttons-group">
+                    <div class="buttons-group">
                         <button type="button" class="subject__add-theme-button">Добавить тему</button>
-                        <button type="submit" class="subject__send-theme-button" disabled>Загрузить</button>
+                        <button type="submit" class="send-button" disabled>Загрузить</button>
                     </div>
                 </form>
             </div>

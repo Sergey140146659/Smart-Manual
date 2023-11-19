@@ -15,7 +15,7 @@ stopword1 = ['и', 'в', 'во', 'не', 'что', 'он', 'на', 'я', 'с', '
 stopword2 = ["для", "быть", "если", "или", "который", "это", "при", "тот", "только", "как", "так", "он", "child", "toc",
              "наш", "также", "свой", "мы", "ваш", "однако"]
 stopword = stopword1 + stopword2
-str_to_replace = "!«»\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~\t\n\r\x0b\x0c\x0a\xa0–"
+str_to_replace = "!«»\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~\t\n\r\x0b\x0c\x0a\xa0–0123456789"
 replace_dict = str.maketrans(str_to_replace, ' ' * len(str_to_replace))
 morph = pymorphy3.MorphAnalyzer()
 

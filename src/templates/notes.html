@@ -1,0 +1,37 @@
+{% extends "bases/admin.html" %}
+
+
+{% block head %}
+
+<link rel="stylesheet" href="../static/styles/notes.css">
+<script src="../static/scripts/notes.js"></script>
+<title>Smart Manual - Admin Notes</title>
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="notes">
+    <div class="notes__inner container">
+        <h1 class="title">Заметки в базе данных</h1>
+        <div class="notes-content">
+            <div class="loaded-db-wide">
+                <ul class="wide-subject-list">
+                </ul>
+            </div>
+            <div class="notes-writing">
+                <h2 class="subtitle">Заметка</h2>
+                <form class="notes-writing__form">
+                    <label class="d-none" for="notes">Заметки к теме</label>
+                    <textarea class="notes-writing__form__textarea" id="notes" name="notes" rows="16" placeholder="Выберите тему" disabled></textarea>
+                    <div class="buttons-group">
+                        <button class="send-button notes-writing__form__send-button" type="submit" disabled>Загрузить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

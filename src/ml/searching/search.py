@@ -1,4 +1,3 @@
-from rank_bm25 import BM25Okapi
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import json
@@ -13,12 +12,9 @@ def searching_tf_idf_faq(path, request, top_n=5):
     '''
     with open(get_path(path), 'r', encoding='utf-8') as f:
         subject = json.load(f)
-
     combined_articles = subject["combined_text_of_sections"]
-
     combined_vectorizer = TfidfVectorizer()
     combined_matrix = combined_vectorizer.fit_transform(combined_articles)
-
     request_tfidf = combined_vectorizer.transform([request])
     cosine_similarities = cosine_similarity(request_tfidf, combined_matrix)
     indices = cosine_similarities.argsort()[0][-top_n:]
@@ -35,12 +31,3 @@ def searching_tf_idf_faq(path, request, top_n=5):
         }
         subject_to_request.append(subject_i)
     return subject_to_request
-
-
-
-# with open(get_path('subjects.json'), 'r', encoding='utf-8') as f:
-#     subject = json.load(f)
-# subject["orig_name"][2] = "Структуры и алгоритмы обработки данных"
-#
-# with open(get_path('subjects.json'), 'w', encoding='utf-8') as f:
-#     json.dump(subject, f)

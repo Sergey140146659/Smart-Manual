@@ -1,11 +1,10 @@
-import json
 import re
 
 from PyPDF2 import PdfReader
 
 from ml.preprocessing_data.Articles_path import get_path
 
-str_to_replace = "!«»\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~\t\n\r\x0b\x0c\x0a\xa0–qwertyiopasdfghjklzxcvbnm"
+str_to_replace = "!«»\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~\t\n\r\x0b\x0c\x0a\xa0–qwertyiopasdfghjklzxcvbnm0123456789"
 
 
 def extract_text_from_pdf(pdf_file_path, page_number):

@@ -1,6 +1,7 @@
 import json
 from random import randint
 
+from classification.classifier_model import classifier
 from ml.preprocessing_data.Articles_path import get_path
 from ml.preprocessing_data.check_subject import check_sub
 from ml.request_processing.request_reduction import request_processing
@@ -26,6 +27,11 @@ understand = [
 def get_answer(subject, request):
     process_request = request_processing(request)
     request = request + ' ' + process_request
+    if classifier(request) == 0:
+        return {"status": "BAD",
+                "text": dont_understand[randint(0, len(dont_understand) - 1)],
+                "data": []
+                }
     with open(get_path('subjects.json'), 'r') as file:
         data = json.load(file)
     index = check_sub(subject)
@@ -40,6 +46,28 @@ def get_answer(subject, request):
             'page_end': sub['page_end']
         })
     return {"status": "OK",
-            "text": understand[randint(0, len(understand))],
+            "text": understand[randint(0, len(understand) - 1)],
+            "data": answer[::-1]
+            }
+
+
+def get_answer_without_classification(subject, request):
+    process_request = request_processing(request)
+    request = request + ' ' + process_request
+    with open(get_path('subjects.json'), 'r') as file:
+        data = json.load(file)
+    index = check_sub(subject)
+    json_name = data['json_name'][index]
+    subs = searching_tf_idf_faq(json_name, request)
+    answer = []
+    for sub in subs:
+        answer.append({
+            'theme_name': sub['sections'],
+            'pdf_name': sub['path_to_pdf'],
+            'page_start': sub['page_start'],
+            'page_end': sub['page_end']
+        })
+    return {"status": "OK",
+            "text": understand[randint(0, len(understand) - 1)],
             "data": answer[::-1]
             }

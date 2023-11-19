@@ -1,7 +1,4 @@
 import json
-import re
-
-from PyPDF2 import PdfReader
 
 from ml.db_creating.pdf_reader import get_text
 from ml.preprocessing_data.Articles_path import get_path
@@ -73,3 +70,4 @@ def create_subject(obj):
             subject_info['lemma_questions'].append([])
         with open(get_path(json_name), "w") as file:
             json.dump(subject_info, file)
+

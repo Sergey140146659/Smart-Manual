@@ -10,16 +10,26 @@ router = APIRouter(
 templates = Jinja2Templates(directory="templates")
 
 
-@router.get("/chatbot")
-def get_chatbot_page(request: Request):
-    return templates.TemplateResponse("chatbot.html", {"request": request})
+@router.get("/search")
+def get_search_page(request: Request):
+    return templates.TemplateResponse("search.html", {"request": request})
 
 
-@router.get("/admin_rates")
+@router.get("/files")
+def get_files_page(request: Request):
+    return templates.TemplateResponse("files.html", {"request": request})
+
+
+@router.get("/admin")
+def redirect_to_db_upload():
+    return RedirectResponse(url="/pages/admin_db_upload")
+
+
+@router.get("/admin_notes")
 def get_admin_systems_page(request: Request):
-    return templates.TemplateResponse("admin_rates.html", {"request": request})
+    return templates.TemplateResponse("notes.html", {"request": request})
 
 
 @router.get("/admin_db_upload")
 def get_db_upload_page(request: Request):
-    return templates.TemplateResponse("admin_db_upload.html", {"request": request})
+    return templates.TemplateResponse("db_upload.html", {"request": request})

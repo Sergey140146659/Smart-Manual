@@ -21,15 +21,17 @@ input::-webkit-inner-spin-button {
 }
 
 .db-upload__content {
-    flex-grow: 1;
     display: flex;
     gap: 50px;
+    height: calc(100vh - 200px);
 }
 
 .loaded-db {
     display: flex;
     flex-direction: column;
     width: 300px;
+    height: 100%;
+    min-width: 300px;
     padding: 0 20px 0 0;
     border-right: 1px solid rgba(0,0,0,0.1);
 }
@@ -40,6 +42,7 @@ input::-webkit-inner-spin-button {
 
 .subject-list {
     flex-grow: 1;
+    overflow-y: scroll;
 }
 
 .subject-list__item {
@@ -51,14 +54,22 @@ input::-webkit-inner-spin-button {
     width: 100%;
     padding: 8px 20px;
     border-radius: 12px;
+    transition: 0.3s;
+}
+
+.subject-list__item__button:hover {
+    background-color: rgba(28, 28, 28, 0.05);
 }
 
 .subject-list__item__button.active {
     background-color: rgba(28, 28, 28, 0.05);
+    color: rgba(0,0,0,0.4)
 }
 
 .db-content {
     flex-grow: 1;
+    height: 100%;
+    overflow-y: scroll;
 }
 
 .upload-file-form {
@@ -134,12 +145,6 @@ input::-webkit-inner-spin-button {
 
 .theme__delete-button:hover {
     background-color: #fde4e4;
-}
-
-.subject__buttons-group {
-    margin-top: 30px;
-    display: flex;
-    gap: 30px;
 }
 
 .subject__add-theme-button {
