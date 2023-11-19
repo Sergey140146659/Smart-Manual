@@ -35,7 +35,6 @@ def classifier(text):
     inputs = tokenizer(text, return_tensors="pt").to(device)
     output = model(**inputs, output_hidden_states=True)
     logits = output.logits
-    probability = torch.nn.Softmax(dim=1)(logits)
     predicted_class_id = logits.argmax().item()
     return predicted_class_id
 

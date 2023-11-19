@@ -1,7 +1,4 @@
 import json
-import re
-
-from PyPDF2 import PdfReader
 
 from ml.db_creating.pdf_reader import get_text
 from ml.preprocessing_data.Articles_path import get_path

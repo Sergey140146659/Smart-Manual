@@ -1,7 +1,6 @@
 import json
 
 from ml.preprocessing_data.Articles_path import get_path
-from ml.preprocessing_data.check_subject import check_sub
 
 
 def marked_subject(sub_json, sub_orig):

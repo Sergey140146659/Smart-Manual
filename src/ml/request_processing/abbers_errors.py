@@ -2,7 +2,7 @@ import json
 from ml.preprocessing_data.Articles_path import get_path
 from ml.request_processing.gramma_checker import correct
 
-str_to_replace = "!«»\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~\t\n\r\x0b\x0c\x0a\xa0–"
+str_to_replace = "!«»\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~\t\n\r\x0b\x0c\x0a\xa0–0123456789"
 replace_dict = str.maketrans(str_to_replace, ' ' * len(str_to_replace))
 
 
