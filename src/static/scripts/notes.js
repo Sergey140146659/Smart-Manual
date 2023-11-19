@@ -110,7 +110,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const noteTextarea = document.querySelector('.notes-writing__form__textarea');
         uploadButton.removeAttribute("disabled");
         noteTextarea.removeAttribute("disabled");
-        noteTextarea.removeAttribute("placeholder");
+        noteTextarea.setAttribute("placeholder", "Напишите что-нибудь...");
     }
 
 
