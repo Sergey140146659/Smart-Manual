@@ -104,7 +104,7 @@ window.addEventListener('DOMContentLoaded', () => {
         createUserMessage(message);
 
         const url = `../answer/get_answer?subject_name=${subjectTargetName}&request=${message}`
-        await createBotMessage(getRequest(url));
+        await createBotMessage(getRequest(url), message);
     });
 
 
@@ -118,7 +118,7 @@ window.addEventListener('DOMContentLoaded', () => {
         messageBlockDOM.append(messageDOM);
     }
 
-    async function createBotMessage (promise) {
+    async function createBotMessage (promise, userMessage) {
         const messageBlockDOM = document.querySelector('.prev_messages_block');
         const messageDOM = document.createElement('div');
         messageDOM.classList.add('request_message');
@@ -131,6 +131,11 @@ window.addEventListener('DOMContentLoaded', () => {
         messageBlockDOM.scrollTo(0, messageBlockDOM.scrollHeight);
 
         const message = await promise;
+        fillAnswerMessage(message, messageDOM, userMessage);
+    }
+
+    function fillAnswerMessage (message, messageDOM, userMessage) {
+        const messageBlockDOM = document.querySelector('.prev_messages_block');
         if (message.status == 'OK') {
             messageDOM.innerHTML = `
                 <p>${message.text}</p>
@@ -152,8 +157,23 @@ window.addEventListener('DOMContentLoaded', () => {
         if (message.status == 'BAD') {
             messageDOM.innerHTML = `
                 <p>${message.text}</p>
+                <p><button class="still-searching-button" type="button">Все равно искать</button></p>
             `
+            const stillSearchingButtonDOM = messageDOM.querySelector('.still-searching-button');
+            const saveSubject = subjectTargetName;
+            stillSearchingButtonDOM.addEventListener('click', () => stillSearching(messageDOM, saveSubject, userMessage));
             messageBlockDOM.scrollTo(0, messageBlockDOM.scrollHeight);
         }
+    }
+
+    async function stillSearching (messageDOM, subject, userMessage) {
+        messageDOM.innerHTML = `
+            <div class="loader-container">
+                <span class="loader"></span>
+            </div>
+        `;
+        const url = `../answer/get_answer_without_classification?subject_name=${subject}&request=${userMessage}`
+        const message = await getRequest(url);
+        fillAnswerMessage(message, messageDOM);
     }
 });
