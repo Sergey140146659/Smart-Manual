@@ -74,10 +74,3 @@ def create_subject(obj):
         with open(get_path(json_name), "w") as file:
             json.dump(subject_info, file)
 
-
-#all_themes = []
-#for nm in range(1,5):
-#    with open(get_path(f"subject{nm}.json"), 'r') as file:
- #       data = json.load(file)
-#    all_themes += data["sections"]
-#print(all_themes)

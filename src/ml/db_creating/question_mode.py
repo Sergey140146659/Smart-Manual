@@ -35,3 +35,4 @@ def get_note(name, theme_name):
     for i in range(len(sub["sections"])):
         if sub["sections"][i] == theme_name:
             return sub["questions"][i]
+
