@@ -4,7 +4,7 @@ from typing import List
 from fastapi import File, UploadFile, APIRouter, Form, Response
 
 from ml.db_creating.create_subject import create_subject
-from ml.db_creating.subject_list import get_subject_list
+from ml.db_creating.subject_list import get_subject_list, get_files_list
 from ml.preprocessing_data.Articles_path import get_path
 from ml.db_creating.view_subject import marked_list
 from ml.db_creating.question_mode import get_note, write_note
@@ -52,6 +52,16 @@ async def wide_subject_list(response: Response):
     except Exception as e:
         response.status_code = 500
         return {"status": "error", "message": str(e)}
+
+
+@router.get("/files_list")
+async def subject_list(response: Response):
+    try:
+        return get_files_list()
+    except Exception as e:
+        response.status_code = 500
+        return {"status": "error", "message": str(e)}
+
 
 
 @router.get("/theme_notes")

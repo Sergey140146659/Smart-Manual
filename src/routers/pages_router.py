@@ -20,6 +20,11 @@ def get_files_page(request: Request):
     return templates.TemplateResponse("files.html", {"request": request})
 
 
+@router.get("/admin")
+def redirect_to_db_upload():
+    return RedirectResponse(url="/pages/admin_db_upload")
+
+
 @router.get("/admin_notes")
 def get_admin_systems_page(request: Request):
     return templates.TemplateResponse("admin_notes.html", {"request": request})
