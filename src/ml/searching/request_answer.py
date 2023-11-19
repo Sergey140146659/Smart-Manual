@@ -49,3 +49,25 @@ def get_answer(subject, request):
             "text": understand[randint(0, len(understand) - 1)],
             "data": answer[::-1]
             }
+
+
+def get_answer_without_classification(subject, request):
+    process_request = request_processing(request)
+    request = request + ' ' + process_request
+    with open(get_path('subjects.json'), 'r') as file:
+        data = json.load(file)
+    index = check_sub(subject)
+    json_name = data['json_name'][index]
+    subs = searching_tf_idf_faq(json_name, request)
+    answer = []
+    for sub in subs:
+        answer.append({
+            'theme_name': sub['sections'],
+            'pdf_name': sub['path_to_pdf'],
+            'page_start': sub['page_start'],
+            'page_end': sub['page_end']
+        })
+    return {"status": "OK",
+            "text": understand[randint(0, len(understand) - 1)],
+            "data": answer[::-1]
+            }
