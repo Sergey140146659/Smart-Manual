@@ -27,9 +27,9 @@ def redirect_to_db_upload():
 
 @router.get("/admin_notes")
 def get_admin_systems_page(request: Request):
-    return templates.TemplateResponse("admin_notes.html", {"request": request})
+    return templates.TemplateResponse("notes.html", {"request": request})
 
 
 @router.get("/admin_db_upload")
 def get_db_upload_page(request: Request):
-    return templates.TemplateResponse("admin_db_upload.html", {"request": request})
+    return templates.TemplateResponse("db_upload.html", {"request": request})
