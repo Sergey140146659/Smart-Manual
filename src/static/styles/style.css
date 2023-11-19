@@ -1105,6 +1105,7 @@ body {
 
 .messanger__subjects {
     width: 300px;
+    min-width: 300px;
     border-right: 1px solid rgba(0,0,0,0.1);
     padding: 10px 20px;
 }
@@ -1174,4 +1175,12 @@ body {
 .instruction__list {
     list-style-type: decimal;
     margin-left: 15px;
+}
+
+.still-searching-button {
+    color: rgb(59, 130, 246);
+}
+
+.still-searching-button:hover {
+    text-decoration: underline;
 }
